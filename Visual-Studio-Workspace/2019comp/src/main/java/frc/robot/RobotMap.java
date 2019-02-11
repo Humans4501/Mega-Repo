@@ -30,5 +30,17 @@ public class RobotMap {
 	public static final int TALON_2 = 1;
 	public static final int TALON_3 = 2;
 	public static final int TALON_4 = 3;
-	public static final int WINCH = 4;  
+	public static final int ARM2 = 4;  
+	public static final int ARM1 = 5;
+	public static final int INTAKE = 6;
+	public static final int WINCH = 7;
+
+	public static final int[] HATCHSOL1 = {0,1};
+	public static final int[] HATCHSOL2 = {2,3};
+
+	public static final int[] ENCL = {2,3};
+	public static final int[] ENCR = {0,1};
+	public static final int POT = 0;
+	public static final int LIMITSWITCHTOP = 5;
+	public static final int LIMITSWITCHBOT = 4;
 }

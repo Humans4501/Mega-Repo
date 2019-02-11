@@ -22,8 +22,9 @@ public class GoIntake extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (Robot.instance.isTest() || !Robot.instance.isAutonomous()) {
-			Robot.intake.intake(Robot.oi.getLeftTrigger2(), Robot.oi.getLeftTrigger2());
+			Robot.intake.intake(Robot.oi.getRightXboxY(),Robot.oi.getRightXboxY());
 		}
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

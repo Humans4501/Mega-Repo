@@ -65,15 +65,15 @@ public class OI {
 
 	Button justIntake = new JoystickButton(controller2, controller2.BUMPER_R);
 
-	Button intake2Open = new JoystickButton(controller2, controller2.BUTTON_X);
-	Button intake2Close = new JoystickButton(controller2, controller2.BUTTON_Y);
+	Button intake2Open = new JoystickButton(controller, controller.BUTTON_X);
+	Button intake2Close = new JoystickButton(controller, controller.BUTTON_Y);
 	// Command Groups
 
 	Button ejection = new JoystickButton(controller2, controller2.BUTTON_START);
 
 	// WINCH
-	Button winchHoldToRaise = new JoystickButton(controller, controller.BUTTON_X);
-	Button winchClimb = new JoystickButton(controller, controller.BUTTON_Y);
+	Button winchHoldToRaise = new JoystickButton(controller2, controller2.BUTTON_X);
+	Button winchClimb = new JoystickButton(controller2, controller2.BUTTON_Y);
 
 	public OI() {
 		shiftHigh.whenPressed(new ShiftLow());
@@ -119,7 +119,7 @@ public class OI {
 	}
 
 	public double getTriggers2() {
-		return controller2.getRawAxis(XboxController.TRIGGER_R) - controller.getRawAxis(XboxController.TRIGGER_L);
+		return controller2.getRawAxis(XboxController.TRIGGER_R) - controller2.getRawAxis(XboxController.TRIGGER_L);
 	}
 
 	public double getRightTrigger2() {

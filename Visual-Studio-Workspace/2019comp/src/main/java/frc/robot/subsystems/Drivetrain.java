@@ -40,16 +40,17 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void driveTime(double forward, double rotate) {
-		drive.arcadeDrive(-forward, -rotate);
+		drive.arcadeDrive(forward, -rotate);
 		drive.setSafetyEnabled(false);
 	}
+	
 
 	public void arcadeDrive(double forward, double rotate) {
 		drive.arcadeDrive(forward, rotate);
 	}
 
 	public void tankDrive(double leftValue, double rightValue) {
-		drive.tankDrive(leftValue, rightValue);
+		drive.tankDrive(-leftValue, -rightValue);
 	}
 
 	@Override

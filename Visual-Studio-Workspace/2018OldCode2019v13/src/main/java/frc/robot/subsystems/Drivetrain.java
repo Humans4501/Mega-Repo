@@ -36,7 +36,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void driveTime(double forward, double rotate) {
-		drive.arcadeDrive(-forward, -rotate);
+		drive.arcadeDrive(forward, -rotate);
 		drive.setSafetyEnabled(false);
 	}
 

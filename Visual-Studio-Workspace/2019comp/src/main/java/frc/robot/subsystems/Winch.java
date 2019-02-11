@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.GoWinch;
+import frc.robot.commands.StopWinch;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -32,7 +33,7 @@ public class Winch extends Subsystem {
   public void goWinch(double speed){
     winchSpeed = speed;
     talon.set(winchSpeed);
-    System.out.println("we have been called");
+    // System.out.println("we have been called");
 
   }
 
@@ -40,6 +41,5 @@ public class Winch extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new GoWinch());
   }
 }

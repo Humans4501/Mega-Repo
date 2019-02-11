@@ -22,7 +22,7 @@ public class Drive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.instance.isTest() || !Robot.instance.isAutonomous()){
-    	Robot.driveTrain.driveTime(-Robot.oi.getTriggers(), -Robot.oi.getLeftXboxX());
+    	Robot.driveTrain.driveTime(Robot.oi.getTriggers(), Robot.oi.getLeftXboxX());
     	}
     }
 

@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drive extends Command {
-
     public Drive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -22,7 +21,8 @@ public class Drive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.instance.isTest() || !Robot.instance.isAutonomous()){
-    	Robot.drivetrain.driveTime(-Robot.oi.getLeftXboxX(), Robot.oi.getTriggers());
+        // Robot.drivetrain.tankDrive(Robot.oi.getJoy1Y(), Robot.oi.getJoy2Y());
+        Robot.drivetrain.driveTime(Robot.oi.getLeftXboxY(), Robot.oi.getLeftXboxX());
     	}
     }
 

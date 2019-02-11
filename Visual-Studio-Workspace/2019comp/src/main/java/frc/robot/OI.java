@@ -7,6 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.commands.*;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -18,10 +23,40 @@ public class OI {
 
 	XboxController controller = new XboxController(0);
 	XboxController controller2 = new XboxController(1);
-
+	Joystick joystick1 = new Joystick(2);
+	Joystick joystick2 = new Joystick(3);
+	Button GoWinch = new JoystickButton(controller2, controller2.BUMPER_L);
+	Button GoWinchBack = new JoystickButton(controller2, controller2.BUMPER_R);
+	Button HatchClose = new JoystickButton(controller, controller.BUTTON_A);
+	Button HatchOpen = new JoystickButton(controller, controller.BUTTON_X);
+	Button HatchPushOff = new JoystickButton(controller, controller.BUTTON_B);
+	Button HatchPush = new JoystickButton(controller, controller.BUTTON_Y);
+	Button ArmScore = new JoystickButton(controller2, controller2.BUTTON_X);
+	Button ArmIntake = new JoystickButton(controller2, controller2.BUTTON_A);
+	Button ArmScoreHigh = new JoystickButton(controller2, controller2.BUTTON_Y);
 	public OI() {
+	GoWinch.whileHeld(new GoWinch());
+	GoWinch.whenReleased(new StopWinch());
+	GoWinchBack.whileHeld(new GoWinchBack());
+	GoWinchBack.whenReleased(new StopWinch());
+	HatchOpen.whenPressed(new OpenHatch());
+	HatchClose.whenPressed(new CloseHatch());
+	HatchPush.whenPressed(new PushHatch());
+	HatchPushOff.whenPressed(new PushHatchOff());
+
+	ArmScore.whenPressed(new ArmScoreBall());
+	ArmIntake.whenPressed(new ArmIntakeBall());
+	ArmScoreHigh.whenPressed(new ArmScoreHigh());
+	
 
 
+	}
+
+	public double getJoy1Y(){
+		return joystick1.getY();
+	}
+	public double getJoy2Y(){
+		return joystick2.getY();
 	}
 
 	public double getTriggers() {
@@ -71,5 +106,18 @@ public class OI {
 
 	public double getRightXboxY2() {
 		return controller2.getRawAxis(5);
+	}
+
+	public boolean getX() {
+		return controller.getRawButton(3);
+	}
+	public boolean getY() {
+		return controller.getRawButton(4);
+	}
+	public boolean getBumperR(){
+		return controller.getRawButton(5);
+	}
+	public boolean getBumperL(){
+		return controller.getRawButton(6);
 	}
 }
