@@ -20,10 +20,8 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.instance.isTest() || !Robot.instance.isAutonomous()){
         // Robot.drivetrain.tankDrive(Robot.oi.getJoy1Y(), Robot.oi.getJoy2Y());
-        Robot.drivetrain.driveTime(Robot.oi.getLeftXboxY(), Robot.oi.getLeftXboxX());
-    	}
+        Robot.drivetrain.driveTime(Robot.oi.getTriggers(), Robot.oi.getLeftXboxX());
     }
 
     // Make this return true when this Command no longer needs to run execute()

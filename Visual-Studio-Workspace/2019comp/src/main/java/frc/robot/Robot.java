@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     instance = this;
     oi = new OI();
     // chooser.addObject("My Auto", new MyAutoCommand());
-    m_autonomousCommand = new AlignLimelight();
+    // m_autonomousCommand = new AlignLimelight();
     
   }
 
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    armPID.setTarget(15);
+    armPID.setTarget(5);
     movePID.encl.reset();
     movePID.encr.reset();
     ahrs.reset();

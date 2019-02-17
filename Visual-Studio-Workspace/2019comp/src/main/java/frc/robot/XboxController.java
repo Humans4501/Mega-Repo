@@ -10,7 +10,7 @@ public class XboxController extends Joystick {
 
 	// Button Maps
 	public static final int BUTTON_A = 1, BUTTON_B = 2, BUTTON_X = 3,
-			BUTTON_Y = 4, BUMPER_R = 5, BUMPER_L = 6, BUTTON_BACK = 7,
+			BUTTON_Y = 4, BUMPER_R = 6, BUMPER_L = 5, BUTTON_BACK = 7,
 			BUTTON_START = 8, BUTTON_STICKL = 9, BUTTON_STICKR = 10;
 	
 	public XboxController(int port) {

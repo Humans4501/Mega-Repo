@@ -25,25 +25,29 @@ public class OI {
 	XboxController controller2 = new XboxController(1);
 	Joystick joystick1 = new Joystick(2);
 	Joystick joystick2 = new Joystick(3);
-	Button GoWinch = new JoystickButton(controller2, controller2.BUMPER_L);
-	Button GoWinchBack = new JoystickButton(controller2, controller2.BUMPER_R);
-	Button HatchClose = new JoystickButton(controller, controller.BUTTON_A);
-	Button HatchOpen = new JoystickButton(controller, controller.BUTTON_X);
-	Button HatchPushOff = new JoystickButton(controller, controller.BUTTON_B);
-	Button HatchPush = new JoystickButton(controller, controller.BUTTON_Y);
+	Button GoWinch = new JoystickButton(controller, controller.BUMPER_L);
+	Button GoWinchBack = new JoystickButton(controller, controller.BUMPER_R);
+	// Button HatchClose = new JoystickButton(controller, controller.BUTTON_A);
+
+	Button HatchOpen = new JoystickButton(controller2, controller2.BUMPER_R);
+	// Button HatchPushOff = new JoystickButton(controller, controller.BUTTON_B);
+	Button HatchPush = new JoystickButton(controller2, controller2.BUMPER_L);
 	Button ArmScore = new JoystickButton(controller2, controller2.BUTTON_X);
 	Button ArmIntake = new JoystickButton(controller2, controller2.BUTTON_A);
 	Button ArmScoreHigh = new JoystickButton(controller2, controller2.BUTTON_Y);
+	Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_B);
 	public OI() {
 	GoWinch.whileHeld(new GoWinch());
 	GoWinch.whenReleased(new StopWinch());
 	GoWinchBack.whileHeld(new GoWinchBack());
 	GoWinchBack.whenReleased(new StopWinch());
 	HatchOpen.whenPressed(new OpenHatch());
-	HatchClose.whenPressed(new CloseHatch());
-	HatchPush.whenPressed(new PushHatch());
-	HatchPushOff.whenPressed(new PushHatchOff());
+	HatchPush.whenPressed(new CloseHatch());
+	HatchPush.whileHeld(new PushHatch());
+	HatchPush.whenReleased(new PushHatchOff());
 
+	AutonimousAssist.whileHeld(new AlignLimelight());
+	AutonimousAssist.whenReleased(new StopDrive());
 	ArmScore.whenPressed(new ArmScoreBall());
 	ArmIntake.whenPressed(new ArmIntakeBall());
 	ArmScoreHigh.whenPressed(new ArmScoreHigh());
@@ -115,9 +119,9 @@ public class OI {
 		return controller.getRawButton(4);
 	}
 	public boolean getBumperR(){
-		return controller.getRawButton(5);
+		return controller2.getRawButton(5);
 	}
 	public boolean getBumperL(){
-		return controller.getRawButton(6);
+		return controller2.getRawButton(6);
 	}
 }
