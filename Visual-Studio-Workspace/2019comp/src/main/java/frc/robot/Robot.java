@@ -28,6 +28,8 @@ import frc.robot.commands.AlignLimelight;
 // import frc.robot.commands.AlignLimelight;
 import frc.robot.commands.AutoMain;
 import frc.robot.commands.DriveFor2Meters;
+import frc.robot.commands.DriveStraightForDistance;
+import frc.robot.commands.Turn90;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.*;
 
@@ -52,8 +54,12 @@ public class Robot extends TimedRobot {
   public static MovePID movePID = new MovePID();
   public static Intake intake = new Intake();
   public static HatchManipulator hatchManipulator = new HatchManipulator();
-  public static LimelightAlignment limelightAlignment = new LimelightAlignment();
+  public static LimelightAlignmentLeft limelightAlignmentLeft = new LimelightAlignmentLeft();
+  public static LimelightAlignmentRight limelightAlignmentRight = new LimelightAlignmentRight();
   public static LimelightMoveForeward limelightMoveForeward = new LimelightMoveForeward();
+  public static LimelightFineAdjustment limelightFineAdjustment = new LimelightFineAdjustment();
+  public static LimelightMoveForewardWidth limelightMoveForewardWidth = new LimelightMoveForewardWidth();
+  public static FineMovePID fineMovePID = new FineMovePID();
   public static ArmPID armPID = new ArmPID();
   public static AHRS ahrs;
   public static Potentiometer pot;
@@ -75,7 +81,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     ahrs = new AHRS(SPI.Port.kMXP);
     UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
-    camera.setResolution(1080, 1920);
+    camera.setResolution(720, 1280);
     // encr = new Encoder(RobotMap.ENCR[0], RobotMap.ENCR[1], true, Encoder.EncodingType.k4X);
     // encl = new Encoder(RobotMap.ENCL[0], RobotMap.ENCL[1], false, Encoder.EncodingType.k4X);
     // encr.setDistancePerPulse(0.0049069);
@@ -100,7 +106,7 @@ public class Robot extends TimedRobot {
     instance = this;
     oi = new OI();
     // chooser.addObject("My Auto", new MyAutoCommand());
-    // m_autonomousCommand = new AlignLimelight();
+    m_autonomousCommand = new Turn90();
     
   }
 
@@ -119,7 +125,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Encoder Right", movePID.encr.getDistance());
     SmartDashboard.putNumber("Encoder Left", movePID.encl.getDistance());
     SmartDashboard.putNumber("Encoders", (movePID.encr.getDistance() + movePID.encl.getDistance())/2);
-    SmartDashboard.putNumber("Potentiometer", armPID.returnPIDInput());
+    SmartDashboard.putNumber("Potentiometer", armPID.getPot());
     SmartDashboard.putNumber("ArmPID", armPID.speed);
     SmartDashboard.putNumber("triggers", 0.5 * oi.getRightXboxX());
     SmartDashboard.putBoolean("straight?", stayStraightPID.isStraight());

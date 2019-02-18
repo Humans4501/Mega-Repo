@@ -35,7 +35,9 @@ public class OI {
 	Button ArmScore = new JoystickButton(controller2, controller2.BUTTON_X);
 	Button ArmIntake = new JoystickButton(controller2, controller2.BUTTON_A);
 	Button ArmScoreHigh = new JoystickButton(controller2, controller2.BUTTON_Y);
-	Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_B);
+	Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_START);
+	Button StopAutonimous = new JoystickButton(controller2, controller2.BUTTON_BACK);
+	Button AutoTesters = new JoystickButton(controller2, controller2.BUTTON_B);
 	public OI() {
 	GoWinch.whileHeld(new GoWinch());
 	GoWinch.whenReleased(new StopWinch());
@@ -46,8 +48,10 @@ public class OI {
 	HatchPush.whileHeld(new PushHatch());
 	HatchPush.whenReleased(new PushHatchOff());
 
-	AutonimousAssist.whileHeld(new AlignLimelight());
-	AutonimousAssist.whenReleased(new StopDrive());
+	AutonimousAssist.whenPressed(new AlignLimelight());
+	StopAutonimous.whenPressed(new StopDrive());
+	AutoTesters.whenPressed(new FineAlignLimelight());
+
 	ArmScore.whenPressed(new ArmScoreBall());
 	ArmIntake.whenPressed(new ArmIntakeBall());
 	ArmScoreHigh.whenPressed(new ArmScoreHigh());
