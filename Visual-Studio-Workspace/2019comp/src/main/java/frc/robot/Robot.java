@@ -28,7 +28,6 @@ import frc.robot.commands.AlignLimelight;
 // import frc.robot.commands.AlignLimelight;
 import frc.robot.commands.AutoMain;
 import frc.robot.commands.DriveStraightForDistance;
-import frc.robot.commands.Turn90;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.*;
 
@@ -105,7 +104,8 @@ public class Robot extends TimedRobot {
     instance = this;
     oi = new OI();
     // chooser.addObject("My Auto", new MyAutoCommand());
-    m_autonomousCommand = new Turn90();
+    // m_autonomousCommand = new DriveStraightForDistance(50);
+    m_autonomousCommand = new AutoMain();
     
   }
 
