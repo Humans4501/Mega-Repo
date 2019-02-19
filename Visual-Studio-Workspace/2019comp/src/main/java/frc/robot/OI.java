@@ -32,30 +32,38 @@ public class OI {
 	Button HatchOpen = new JoystickButton(controller2, controller2.BUMPER_R);
 	// Button HatchPushOff = new JoystickButton(controller, controller.BUTTON_B);
 	Button HatchPush = new JoystickButton(controller2, controller2.BUMPER_L);
-	Button ArmScore = new JoystickButton(controller2, controller2.BUTTON_X);
-	Button ArmIntake = new JoystickButton(controller2, controller2.BUTTON_A);
-	Button ArmScoreHigh = new JoystickButton(controller2, controller2.BUTTON_Y);
 	Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_START);
 	Button StopAutonimous = new JoystickButton(controller2, controller2.BUTTON_BACK);
 	Button AutoTesters = new JoystickButton(controller2, controller2.BUTTON_B);
+	Button AutoHatch = new JoystickButton(controller2, controller2.BUTTON_A);
+	Button AutoCargo = new JoystickButton(controller2, controller2.BUTTON_X);
+	Button AutoLoadHatch = new JoystickButton(controller2, controller2.BUTTON_Y);
+
+
+	Button PushRamp = new JoystickButton(controller, controller.BUTTON_START);
+
 	public OI() {
 	GoWinch.whileHeld(new GoWinch());
 	GoWinch.whenReleased(new StopWinch());
 	GoWinchBack.whileHeld(new GoWinchBack());
 	GoWinchBack.whenReleased(new StopWinch());
+
+	PushRamp.whileHeld(new PushRamp());
+	PushRamp.whenReleased(new RetractRamp());
+
 	HatchOpen.whenPressed(new OpenHatch());
 	HatchPush.whenPressed(new CloseHatch());
 	HatchPush.whileHeld(new PushHatch());
 	HatchPush.whenReleased(new PushHatchOff());
 
+
+
 	AutonimousAssist.whenPressed(new AlignLimelight());
 	StopAutonimous.whenPressed(new StopDrive());
 	AutoTesters.whenPressed(new FineAlignLimelight());
-
-	ArmScore.whenPressed(new ArmScoreBall());
-	ArmIntake.whenPressed(new ArmIntakeBall());
-	ArmScoreHigh.whenPressed(new ArmScoreHigh());
-	
+	AutoHatch.whenPressed(new AutoHatch());
+	AutoCargo.whenPressed(new AutoCargo());
+	AutoLoadHatch.whenPressed(new AutoLoadHatch());
 
 
 	}
@@ -127,5 +135,8 @@ public class OI {
 	}
 	public boolean getBumperL(){
 		return controller2.getRawButton(6);
+	}
+	public double getPOV2(){
+		return controller2.getPOV();
 	}
 }

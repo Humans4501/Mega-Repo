@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -21,6 +22,7 @@ public class Winch extends Subsystem {
   double winchSpeed;
 
   Talon talon = new Talon(RobotMap.WINCH);
+  DoubleSolenoid winchsol = new DoubleSolenoid(RobotMap.WHINCHSOL[0], RobotMap.WHINCHSOL[1]);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Winch(){
@@ -35,6 +37,13 @@ public class Winch extends Subsystem {
     talon.set(winchSpeed);
     // System.out.println("we have been called");
 
+  }
+
+  public void pushRamp(){
+    winchsol.set(DoubleSolenoid.Value.kForward);
+  }
+  public void retractRamp(){
+    winchsol.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override

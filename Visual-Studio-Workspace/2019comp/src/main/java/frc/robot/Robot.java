@@ -27,7 +27,6 @@ import edu.wpi.first.wpilibj.SPI;
 import frc.robot.commands.AlignLimelight;
 // import frc.robot.commands.AlignLimelight;
 import frc.robot.commands.AutoMain;
-import frc.robot.commands.DriveFor2Meters;
 import frc.robot.commands.DriveStraightForDistance;
 import frc.robot.commands.Turn90;
 import frc.robot.commands.Drive;
@@ -130,6 +129,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("triggers", 0.5 * oi.getRightXboxX());
     SmartDashboard.putBoolean("straight?", stayStraightPID.isStraight());
     SmartDashboard.putBoolean("run a marathon?", movePID.isDone());
+    SmartDashboard.putNumber("pov", oi.getPOV2());
 
 
 //post to smart dashboard periodically
@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    armPID.setTarget(5);
+    armPID.setTarget(1);
     movePID.encl.reset();
     movePID.encr.reset();
     ahrs.reset();
@@ -168,6 +168,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() { 
     ahrs.zeroYaw();
+    armPID.setPot();
       /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -198,6 +199,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    armPID.setPot();
   }
 
   /**

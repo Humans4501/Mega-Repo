@@ -37,6 +37,7 @@ public class RobotMap {
 
 	public static final int[] HATCHSOL1 = {0,1};
 	public static final int[] HATCHSOL2 = {2,3};
+	public static final int[] WHINCHSOL = {4,5};
 
 	public static final int[] ENCL = {2,3};
 	public static final int[] ENCR = {0,1};
