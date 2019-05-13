@@ -86,7 +86,7 @@ public class LimelightAlignmentLeft extends PIDSubsystem {
         currOutput = output;
       }
 
-      if(currOutput < 0.3 && currOutput > -0.3){
+      if(currOutput < 0.5 && currOutput > -0.5){
         done = true;
       }else{
         done = false;

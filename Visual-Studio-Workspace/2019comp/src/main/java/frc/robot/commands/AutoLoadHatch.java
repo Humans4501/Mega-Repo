@@ -32,7 +32,7 @@ public class AutoLoadHatch extends CommandGroup {
     // arm.
     addSequential(new AlignLimelight());
     // addSequential(new Delay(50l));
-    addSequential(new DriveStraightForDistance(10.0));
+    addSequential(new DriveForTime(600l));
     addSequential(new Delay(50l));
     addSequential(new OpenHatch());
     addSequential(new DriveStraightForDistance(-10.0));

@@ -39,7 +39,11 @@ public class AlignLimelight extends Command {
     }else{
       turn = Robot.limelightAlignmentLeft.currOutput;
     }
-    Robot.drivetrain.driveTime(Robot.limelightMoveForewardWidth.currOutput, -turn);
+    if (Robot.limelightAlignmentLeft.done){
+      Robot.drivetrain.driveTime(Robot.limelightMoveForewardWidth.currOutput, -turn);
+    }else{
+      Robot.drivetrain.driveTime(0, -turn);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
