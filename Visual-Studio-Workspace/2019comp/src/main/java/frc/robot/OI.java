@@ -20,11 +20,11 @@ public class OI {
 
 	public static final int TRIGGER = 1, BUTTON_2 = 2, BUTTON_3 = 3, BUTTON_4 = 4, BUTTON_5 = 5, BUTTON_6 = 6,
 			BUTTON_7 = 7, BUTTON_8 = 8, BUTTON_9 = 9, BUTTON_10 = 10, BUTTON_11 = 11;
+	public static final int X = 4,  A = 1, Y = 5, B = 2, RB = 8, RT = 10, LB = 7, LT = 9, START = 12;
 
 	XboxController controller = new XboxController(0);
 	XboxController controller2 = new XboxController(1);
-	Joystick joystick1 = new Joystick(2);
-	Joystick joystick2 = new Joystick(3);
+	Joystick fightstick = new Joystick(2);
 	Button GoWinch = new JoystickButton(controller, controller.BUMPER_L);
 	Button GoWinchBack = new JoystickButton(controller, controller.BUMPER_R);
 	// Button HatchClose = new JoystickButton(controller, controller.BUTTON_A);
@@ -32,48 +32,73 @@ public class OI {
 	Button HatchOpen = new JoystickButton(controller2, controller2.BUMPER_R);
 	// Button HatchPushOff = new JoystickButton(controller, controller.BUTTON_B);
 	Button HatchPush = new JoystickButton(controller2, controller2.BUMPER_L);
-	Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_START);
-	Button StopAutonimous = new JoystickButton(controller2, controller2.BUTTON_BACK);
-	Button AutoTesters = new JoystickButton(controller2, controller2.BUTTON_B);
-	Button AutoHatch = new JoystickButton(controller2, controller2.BUTTON_A);
-	Button AutoCargo = new JoystickButton(controller2, controller2.BUTTON_X);
-	Button AutoLoadHatch = new JoystickButton(controller2, controller2.BUTTON_Y);
+	// Button AutonimousAssist = new JoystickButton(controller2, controller2.BUTTON_START);
+	Button StopAutonimous = new JoystickButton(controller, controller.BUTTON_A);
+	Button StopAutonimous2 = new JoystickButton(fightstick, START);
+	// Button AutoTesters = new JoystickButton(controller2, controller2.BUTTON_B);
+	// Button AutoHatch = new JoystickButton(controller2, controller2.BUTTON_A);
+	// Button AutoCargo = new JoystickButton(controller2, controller2.BUTTON_X);
+	// Button AutoLoadHatch = new JoystickButton(controller2, controller2.BUTTON_Y);
+
+	Button AutoRamp = new JoystickButton(fightstick, LT);
+
+	Button AutoHatch = new JoystickButton(fightstick, X);
+	Button AutoCargo = new JoystickButton(fightstick, Y);
+	Button AutoLoadHatch = new JoystickButton(fightstick, A);
+	Button AutoLoadCargo = new JoystickButton(fightstick, B);
+	Button AutoCargoL1 = new JoystickButton(fightstick, RB);
+	Button AutoHatchHigh = new JoystickButton(fightstick, LB);
+	// Button AutonimousAssist = new JoystickButton(fightstick, RT);
+	Button AutoTesters = new JoystickButton(fightstick, RT);
+
+	Button ArmHigh = new JoystickButton(controller2, controller2.BUTTON_Y);
+	Button ArmCargoL1 = new JoystickButton(controller2, controller2.BUTTON_B);
+	Button ArmHatchL2 = new JoystickButton(controller2, controller2.BUTTON_X);
+	Button ArmLow = new JoystickButton(controller2, controller2.BUTTON_A);
 
 
-	Button PushRamp = new JoystickButton(controller, controller.BUTTON_START);
+
+
+	Button PushRamp = new JoystickButton(controller, controller.BUTTON_BACK);
 
 	public OI() {
-	GoWinch.whileHeld(new GoWinch());
-	GoWinch.whenReleased(new StopWinch());
-	GoWinchBack.whileHeld(new GoWinchBack());
-	GoWinchBack.whenReleased(new StopWinch());
-
-	PushRamp.whileHeld(new PushRamp());
-	PushRamp.whenReleased(new RetractRamp());
-
-	HatchOpen.whenPressed(new OpenHatch());
-	HatchPush.whenPressed(new CloseHatch());
-	HatchPush.whileHeld(new PushHatch());
-	HatchPush.whenReleased(new PushHatchOff());
+		ArmHigh.whenPressed(new ArmScoreHigh());
+		ArmCargoL1.whenPressed(new ArmScoreBall());
+		ArmHatchL2.whenPressed(new ArmScoreHatchHigh());
+		ArmLow.whenPressed(new ArmIntakeBall());
 
 
+		GoWinch.whileHeld(new GoWinch());
+		GoWinch.whenReleased(new StopWinch());
+		GoWinchBack.whileHeld(new GoWinchBack());
+		GoWinchBack.whenReleased(new StopWinch());
 
-	AutonimousAssist.whenPressed(new AlignLimelight());
-	StopAutonimous.whenPressed(new StopDrive());
-	AutoTesters.whenPressed(new FineAlignLimelight());
-	AutoHatch.whenPressed(new AutoHatch());
-	AutoCargo.whenPressed(new AutoCargo());
-	AutoLoadHatch.whenPressed(new AutoLoadHatch());
+		PushRamp.whileHeld(new PushRamp());
+		PushRamp.whenReleased(new RetractRamp());
+
+		HatchOpen.whenPressed(new OpenHatch());
+		HatchPush.whenPressed(new CloseHatch());
+		HatchPush.whileHeld(new PushHatch());
+		HatchPush.whenReleased(new PushHatchOff());
+
+
+		// AutonimousAssist.whenPressed(new AlignLimelight());
+		StopAutonimous.whenPressed(new StopDrive());
+		StopAutonimous2.whenPressed(new StopDrive());
+		AutoTesters.whenPressed(new FineAlignLimelight());
+		AutoHatch.whenPressed(new AutoHatch());
+		AutoCargo.whenPressed(new AutoCargo());
+		AutoLoadHatch.whenPressed(new AutoLoadHatch());
+		AutoRamp.whenPressed(new BackupAndDeployRamp());
+		AutoLoadCargo.whenPressed(new AutoLoadCargo());
+		AutoHatchHigh.whenPressed(new AutoHatchL2());
+		AutoCargoL1.whenPressed(new AutoCargoL1());
+
+
 
 
 	}
 
-	public double getJoy1Y(){
-		return joystick1.getY();
-	}
-	public double getJoy2Y(){
-		return joystick2.getY();
-	}
 
 	public double getTriggers() {
 		return controller.getRawAxis(XboxController.TRIGGER_R) - controller.getRawAxis(XboxController.TRIGGER_L);
@@ -96,7 +121,7 @@ public class OI {
 	}
 
 	public double getTriggers2() {
-		return controller2.getRawAxis(XboxController.TRIGGER_R) - controller.getRawAxis(XboxController.TRIGGER_L);
+		return controller2.getRawAxis(XboxController.TRIGGER_R) - controller2.getRawAxis(XboxController.TRIGGER_L);
 	}
 
 	public double getRightTrigger2() {
@@ -129,6 +154,18 @@ public class OI {
 	}
 	public boolean getY() {
 		return controller.getRawButton(4);
+	}
+	public boolean getX2() {
+		return controller2.getRawButton(3);
+	}
+	public boolean getY2() {
+		return controller2.getRawButton(4);
+	}
+	public boolean getStart2() {
+		return controller2.getRawButton(8);
+	}
+	public boolean getBack2() {
+		return controller2.getRawButton(7);
 	}
 	public boolean getBumperR(){
 		return controller2.getRawButton(5);

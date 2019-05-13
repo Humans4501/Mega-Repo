@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -28,7 +27,6 @@ import frc.robot.commands.AlignLimelight;
 // import frc.robot.commands.AlignLimelight;
 import frc.robot.commands.AutoMain;
 import frc.robot.commands.DriveStraightForDistance;
-import frc.robot.commands.Turn90;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.*;
 
@@ -79,8 +77,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     ahrs = new AHRS(SPI.Port.kMXP);
-    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
-    camera.setResolution(720, 1280);
     // encr = new Encoder(RobotMap.ENCR[0], RobotMap.ENCR[1], true, Encoder.EncodingType.k4X);
     // encl = new Encoder(RobotMap.ENCL[0], RobotMap.ENCL[1], false, Encoder.EncodingType.k4X);
     // encr.setDistancePerPulse(0.0049069);
@@ -105,7 +101,8 @@ public class Robot extends TimedRobot {
     instance = this;
     oi = new OI();
     // chooser.addObject("My Auto", new MyAutoCommand());
-    m_autonomousCommand = new Turn90();
+    // m_autonomousCommand = new DriveStraightForDistance(50);
+    // m_autonomousCommand = new AutoMain();
     
   }
 
