@@ -127,6 +127,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("straight?", stayStraightPID.isStraight());
     SmartDashboard.putBoolean("run a marathon?", movePID.isDone());
     SmartDashboard.putNumber("pov", oi.getPOV2());
+    SmartDashboard.putNumber("triggers", oi.getTriggers());
+    SmartDashboard.putNumber("stick x", oi.getLeftXboxX());
+
 
 
 //post to smart dashboard periodically
