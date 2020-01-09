@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  // private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final CANCoder _CanCoderf1 = new CANCoder(Constants.falcons1);
   private final CANCoder _CanCoderf2 = new CANCoder(Constants.falcons2);
 
@@ -118,8 +118,8 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Confidence", match.confidence);
     // SmartDashboard.putString("Detected Color", colorString);
 
-    // SmartDashboard.putNumber("RPM Left Falcon", _CanCoderf1.getVelocity()/360);
-    // SmartDashboard.putNumber("RPM Right Falcon", _CanCoderf2.getVelocity()/360);
+    SmartDashboard.putNumber("RPM Left Falcon", _CanCoderf1.getVelocity()/360);
+    SmartDashboard.putNumber("RPM Right Falcon", _CanCoderf2.getVelocity()/360);
 
 
   }
