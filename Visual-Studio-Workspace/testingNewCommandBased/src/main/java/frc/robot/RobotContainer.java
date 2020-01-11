@@ -12,9 +12,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.*;
+import frc.robot.subsystems.ShooterDesiredSpeedFalcon2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -29,9 +30,11 @@ public class RobotContainer {
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
+  private final ShooterDesiredSpeedFalcon1 shooterSpeedF1 = new ShooterDesiredSpeedFalcon1();
+  private final ShooterDesiredSpeedFalcon2 shooterSpeedF2 = new ShooterDesiredSpeedFalcon2();
 
 
-  private final Shoot shoot = new Shoot(shooter, joystick);
+  private final Shoot shoot = new Shoot(shooter, shooterSpeedF1,shooterSpeedF2,  joystick);
   private final Drive drive = new Drive(driveTrain, controller);
 
 
@@ -39,6 +42,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
     // Configure the button bindings
     configureButtonBindings();
 

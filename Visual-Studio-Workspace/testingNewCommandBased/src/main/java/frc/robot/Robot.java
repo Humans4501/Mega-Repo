@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -24,6 +25,8 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterDesiredSpeedFalcon1;
+import frc.robot.subsystems.ShooterDesiredSpeedFalcon2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,18 +40,21 @@ public class Robot extends TimedRobot {
   private final XboxController controller = new XboxController(0);
   private final Joystick joystick = new Joystick(2);
 
-  private final DriveTrain driveTrain = new DriveTrain();
+  private final TalonFX falcon1 = new TalonFX(Constants.falcons1);
+  private final TalonFX falcon2 = new TalonFX(Constants.falcons2);
+
+  private final ShooterDesiredSpeedFalcon1 pidF1 = new ShooterDesiredSpeedFalcon1();
+  private final ShooterDesiredSpeedFalcon2 pidF2 = new ShooterDesiredSpeedFalcon2();
+  private final DriveTrain drivetrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
 
-
-  private final Shoot shoot = new Shoot(shooter, joystick);
-  private final Drive drive = new Drive(driveTrain, controller);
+  private final Drive drive = new Drive(drivetrain, controller);
+  private final Shoot shoot = new Shoot(shooter, pidF1, pidF2, joystick);
 
   private RobotContainer m_robotContainer;
 
   // private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final CANCoder _CanCoderf1 = new CANCoder(Constants.falcons1);
-  private final CANCoder _CanCoderf2 = new CANCoder(Constants.falcons2);
+  
 
   // private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   
@@ -72,8 +78,9 @@ public class Robot extends TimedRobot {
     // m_colorMatcher.addColorMatch(kRedTarget);
     // m_colorMatcher.addColorMatch(kYellowTarget);    
 
-    CommandScheduler.getInstance().setDefaultCommand(driveTrain, drive);
+    CommandScheduler.getInstance().setDefaultCommand(drivetrain, drive);
     CommandScheduler.getInstance().setDefaultCommand(shooter, shoot);
+
   }
 
   /**
@@ -118,8 +125,9 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Confidence", match.confidence);
     // SmartDashboard.putString("Detected Color", colorString);
 
-    SmartDashboard.putNumber("RPM Left Falcon", _CanCoderf1.getVelocity()/360);
-    SmartDashboard.putNumber("RPM Right Falcon", _CanCoderf2.getVelocity()/360);
+    SmartDashboard.putNumber("RPM Left Falcon1", (falcon1.getSelectedSensorVelocity() * 600.0)/2048.0);
+    SmartDashboard.putNumber("RPM Right Falcon2", (falcon2.getSelectedSensorVelocity() * 600.0)/2048.0);
+    // shooterLeft.get
 
 
   }
