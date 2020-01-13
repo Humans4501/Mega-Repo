@@ -34,7 +34,7 @@ public class Load extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.load(joystick2.getRawAxis(3));
+    shooter.load(-1*joystick2.getRawAxis(3));
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 

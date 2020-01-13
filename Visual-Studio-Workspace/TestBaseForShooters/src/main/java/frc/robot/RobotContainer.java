@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -34,18 +36,24 @@ public class RobotContainer {
   public final DriveTrain drivetrain = new DriveTrain();
   public final Shooter shooter = new Shooter();
   public final TestShooter2 testshooter2 = new TestShooter2();
+  public final ShooterDesiredSpeedFalcon1 rpmFalcon1 = new ShooterDesiredSpeedFalcon1();
+  public final ShooterDesiredSpeedFalcon2 rpmFalcon2 = new ShooterDesiredSpeedFalcon2();
 
   public final Drive drive = new Drive(drivetrain, joystick1, joystick2);
   public final Shoot shoot = new Shoot(shooter, joystick1, joystick2);
   public final Shoot2 shoot2 = new Shoot2(testshooter2, joystick1, joystick2);
   public final Load load = new Load(shooter, joystick1, joystick2);
+  public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick2);
+
+  public static final TalonFX falcon1 = new TalonFX(Constants.falcons1);
+  public static final TalonFX falcon2 = new TalonFX(Constants.falcons2);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
 
 
-  private JoystickButton trigger = new JoystickButton(joystick1, 0);
+  private JoystickButton trigger = new JoystickButton(joystick1, 1);
   
 
 

@@ -24,6 +24,9 @@ public final class Constants {
     public static int shoot3 = 6;
     public static int shoot4 = 7;
     public static int load = 8;
+
+    public static int falcons1 = 5;
+    public static int falcons2 = 6;
     
 
     public static final int STICK_LX = 0, STICK_LY = 1,
