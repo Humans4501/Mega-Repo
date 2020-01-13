@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  Joystick joystick;
   WPI_TalonFX shooterLeft, shooterRight;
   Talon shooterTalonL, shooterTalonR;
   Talon loader;
@@ -29,7 +29,6 @@ public class Shooter extends SubsystemBase {
     shooterTalonL = new Talon(Constants.shoot1);
     shooterTalonR = new Talon(Constants.shoot2);
     loader = new Talon(Constants.load);
-    joystick = new Joystick(1);
     
     
   }
@@ -51,7 +50,8 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    load(joystick.getRawAxis(3));
+    load(RobotContainer.joystick2.getRawAxis(3));
+    shootTalon(RobotContainer.joystick1.getRawAxis(2), RobotContainer.joystick1.getRawAxis(2));
   }
 
 

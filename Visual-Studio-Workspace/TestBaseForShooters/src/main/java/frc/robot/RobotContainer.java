@@ -30,8 +30,8 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final Joystick joystick1 = new Joystick(0);
-  private final Joystick joystick2 = new Joystick(1);
+  public static final Joystick joystick1 = new Joystick(0);
+  public static final Joystick joystick2 = new Joystick(1);
 
   public final DriveTrain drivetrain = new DriveTrain();
   public final Shooter shooter = new Shooter();
@@ -43,7 +43,7 @@ public class RobotContainer {
   public final Shoot shoot = new Shoot(shooter, joystick1, joystick2);
   public final Shoot2 shoot2 = new Shoot2(testshooter2, joystick1, joystick2);
   public final Load load = new Load(shooter, joystick1, joystick2);
-  public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick2);
+  public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick1);
 
   public static final TalonFX falcon1 = new TalonFX(Constants.falcons1);
   public static final TalonFX falcon2 = new TalonFX(Constants.falcons2);

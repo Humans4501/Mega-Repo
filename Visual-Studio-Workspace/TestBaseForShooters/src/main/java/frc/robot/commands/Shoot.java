@@ -36,7 +36,7 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shoot(joystick1.getRawAxis(2), joystick1.getRawAxis(2));
+    shooter.shootTalon(joystick1.getRawAxis(2), joystick1.getRawAxis(2));
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 

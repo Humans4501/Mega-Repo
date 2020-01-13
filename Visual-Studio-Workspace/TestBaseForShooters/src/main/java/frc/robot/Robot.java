@@ -26,8 +26,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   NetworkTableEntry rpmFalcons1;
   NetworkTableEntry rpmFalcons2;
-  double rpmFalcon1;
-  double rpmFalcon2;
+  public static double rpmFalcon1;
+  public static double rpmFalcon2;
   ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
 
   private RobotContainer m_robotContainer;
@@ -43,7 +43,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.drivetrain, m_robotContainer.drive);
-    CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.shooter, m_robotContainer.shoot);
+    CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.shooter, m_robotContainer.shootFalcon);
+
+    rpmFalcons1 = tab.add("Desired RPM Falcon1", 0).getEntry();
+    rpmFalcons2 = tab.add("Desired RPM Falcon2", 0).getEntry();
   }
 
   /**
@@ -63,10 +66,10 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("RPM Left Falcon1", (RobotContainer.falcon1.getSelectedSensorVelocity() * 600.0) / 2048.0);
     SmartDashboard.putNumber("RPM Right Falcon2", (RobotContainer.falcon2.getSelectedSensorVelocity() * 600.0) / 2048.0);
-    rpmFalcons1 = tab.add("Desired RPM Falcon2", 0).getEntry();
-    rpmFalcons2 = tab.add("Desired RPM Falcon2", 0).getEntry();
+
     rpmFalcon1 = rpmFalcons1.getDouble(0);
     rpmFalcon2 = rpmFalcons2.getDouble(0);
+
   }
 
   /**
