@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -40,8 +42,8 @@ public class Robot extends TimedRobot {
   private final XboxController controller = new XboxController(0);
   private final Joystick joystick = new Joystick(2);
 
-  private final TalonFX falcon1 = new TalonFX(Constants.falcons1);
-  private final TalonFX falcon2 = new TalonFX(Constants.falcons2);
+  // private final TalonFX falcon1 = new TalonFX(Constants.falcons1);
+  // private final TalonFX falcon2 = new TalonFX(Constants.falcons2);
 
   private final ShooterDesiredSpeedFalcon1 pidF1 = new ShooterDesiredSpeedFalcon1();
   private final ShooterDesiredSpeedFalcon2 pidF2 = new ShooterDesiredSpeedFalcon2();
@@ -52,6 +54,9 @@ public class Robot extends TimedRobot {
   private final Shoot shoot = new Shoot(shooter, pidF1, pidF2, joystick);
 
   private RobotContainer m_robotContainer;
+
+  public static AHRS ahrs = new AHRS(Port.kMXP); 
+
 
   // private final I2C.Port i2cPort = I2C.Port.kOnboard;
   
@@ -81,6 +86,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().setDefaultCommand(drivetrain, drive);
     CommandScheduler.getInstance().setDefaultCommand(shooter, shoot);
 
+
+    ahrs.reset();
   }
 
   /**
@@ -92,6 +99,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+
+    
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -125,10 +134,10 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("Confidence", match.confidence);
     // SmartDashboard.putString("Detected Color", colorString);
 
-    SmartDashboard.putNumber("RPM Left Falcon1", (falcon1.getSelectedSensorVelocity() * 600.0)/2048.0);
-    SmartDashboard.putNumber("RPM Right Falcon2", (falcon2.getSelectedSensorVelocity() * 600.0)/2048.0);
+    // SmartDashboard.putNumber("RPM Left Falcon1", (falcon1.getSelectedSensorVelocity() * 600.0)/2048.0);
+    // SmartDashboard.putNumber("RPM Right Falcon2", (falcon2.getSelectedSensorVelocity() * 600.0)/2048.0);
     // shooterLeft.get
-
+      SmartDashboard.putNumber("angle", ahrs.getAngle());
 
   }
 
@@ -172,6 +181,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    ahrs.zeroYaw();
   }
 
   /**

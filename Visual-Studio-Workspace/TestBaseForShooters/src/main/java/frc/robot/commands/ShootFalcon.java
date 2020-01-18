@@ -44,8 +44,8 @@ public class ShootFalcon extends CommandBase {
   @Override
   public void execute() {
     
-    pidF1.setSetpoint(Robot.rpmFalcon1 * 6600.0);
-    pidF2.setSetpoint(Robot.rpmFalcon2 * -6600.0);
+    pidF1.setSetpoint(-Robot.rpmFalcon1);
+    pidF2.setSetpoint(Robot.rpmFalcon2);
     shooter.shoot(pidF1.currOutput, pidF2.currOutput);
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }

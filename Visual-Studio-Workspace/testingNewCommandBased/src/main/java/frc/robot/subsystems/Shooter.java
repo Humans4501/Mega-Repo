@@ -22,14 +22,14 @@ public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterLeft, shooterRight;
 
   public Shooter() {
-    shooterLeft = new WPI_TalonFX(Constants.falcons1);
-    shooterRight = new WPI_TalonFX(Constants.falcons2);
+    // shooterLeft = new WPI_TalonFX(Constants.falcons1);
+    // shooterRight = new WPI_TalonFX(Constants.falcons2);
     
   }
 
   public void shoot(double speed1, double speed2){
-    shooterLeft.set(speed1);
-    shooterRight.set(speed2);
+    // shooterLeft.set(speed1);
+    // shooterRight.set(speed2);
   }
 
   @Override

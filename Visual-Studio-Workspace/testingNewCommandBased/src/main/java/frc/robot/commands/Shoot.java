@@ -30,8 +30,8 @@ public class Shoot extends CommandBase {
     pidF2 = pIDF2;
     joystick = controller;
     addRequirements(shooter);
-    pidF1.enable();
-    pidF2.enable();
+    // pidF1.enable();
+    // pidF2.enable();
   }
 
   // Called when the command is initially scheduled.

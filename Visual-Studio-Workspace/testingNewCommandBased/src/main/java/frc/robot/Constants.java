@@ -20,10 +20,10 @@ import edu.wpi.first.wpilibj.XboxController;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int frontLeft = 1;
-    public static int frontRight = 2;
-    public static int backLeft = 3;
-    public static int backRight = 4;
+    public static int frontLeft = 10;
+    public static int frontRight = 11;
+    public static int backLeft = 12;
+    public static int backRight = 13;
 
     public static int falcons1 = 5;
     public static int falcons2 = 6;
