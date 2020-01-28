@@ -7,15 +7,12 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
-import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class ShooterDesiredSpeedFalcon2 extends PIDSubsystem {
-  private final TalonFX falcon2 = new TalonFX(Constants.falcons2);
   static double Kp = 0.0002;
   static double Ki = 0.000;
   static double Kd = 0;
@@ -48,6 +45,6 @@ public class ShooterDesiredSpeedFalcon2 extends PIDSubsystem {
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
-    return (falcon2.getSelectedSensorVelocity() * 600.0)/2048.0;
+    return (RobotContainer.falcon2.getSelectedSensorVelocity() * 600.0)/2048.0;
   }
 }

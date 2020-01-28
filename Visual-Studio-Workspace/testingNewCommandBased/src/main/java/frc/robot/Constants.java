@@ -7,7 +7,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -25,8 +28,44 @@ public final class Constants {
     public static int backLeft = 12;
     public static int backRight = 13;
 
+    public static int shoot1 = 4;
+    public static int shoot2 = 5;
+    public static int shoot3 = 6;
+    public static int shoot4 = 7;
+    public static int load = 8;
+
     public static int falcons1 = 5;
     public static int falcons2 = 6;
+    
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
+    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+
+    public static final double ksVolts = 0.22;
+    public static final double kvVoltSecondsPerMeter = 0.3;
+    public static final double kaVoltSecondsSquaredPerMeter = 0;
+
+    public static final double kPDriveVel = 0.2;
+
+    //pid numbers for pid controllers in autocommand in robot container
+    public static final double kPXController = 0.2;
+    public static final double kPYController = 0.2;
+    public static final double kPThetaController = 0.2;
+
+
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
+        new TrapezoidProfile.Constraints(kMaxAngularSpeedRadiansPerSecond,
+        kMaxAngularSpeedRadiansPerSecondSquared);
+
+    public static final SimpleMotorFeedforward kFeedforward = new SimpleMotorFeedforward(ksVolts, kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter);
+
+    static Translation2d m_frontLeftLocation = new Translation2d(0.2794, 0.315722);
+    static Translation2d m_frontRightLocation = new Translation2d(0.2794, -0.315722);
+    static Translation2d m_backLeftLocation = new Translation2d(-0.2794, 0.315722);
+    static Translation2d m_backRightLocation = new Translation2d(-0.2794, -0.315722);
+    public static MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation,
+            m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
     public static final int STICK_LX = 0, STICK_LY = 1,
 			TRIGGER_L = 2, TRIGGER_R = 3,

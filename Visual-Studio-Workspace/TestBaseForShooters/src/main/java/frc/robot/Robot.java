@@ -69,6 +69,8 @@ public class Robot extends TimedRobot {
 
     rpmFalcon1 = rpmFalcons1.getDouble(0);
     rpmFalcon2 = rpmFalcons2.getDouble(0);
+    rpmFalcons1.equals(rpmFalcon1);
+    rpmFalcons2.equals(rpmFalcon2);
 
   }
 

@@ -7,43 +7,41 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 
-public class ShooterDesiredSpeedFalcon1 extends PIDSubsystem {
-  static double Kp = 0.0002;
+public class LimelightAim extends PIDSubsystem {
+  static double Kp = 0.05;
   static double Ki = 0.000;
-  static double Kd = 0;
+  static double Kd = 0.01;
 
   public double currOutput;
+
+
   /**
-   * Creates a new ShooterDesiredSpeed.
+   * Creates a new LimelightAim.
    */
-  public ShooterDesiredSpeedFalcon1() {
+  public LimelightAim() {
     super(
         // The PIDController used by the subsystem
-        new PIDController(Kp, Ki,Kd));
+        new PIDController(Kp, Ki, Kd));
   }
 
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    SmartDashboard.putNumber("setpoint", setpoint);
-    SmartDashboard.putNumber("output Falcon 1", output);
-    currOutput = output + setpoint / 6503.8;
+    currOutput = output;
   }
 
   public void setpoint(double setPoint){
     getController().setSetpoint(setPoint);
   }
-  
 
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
-    return (RobotContainer.falcon1.getSelectedSensorVelocity() * 600.0)/2048.0;
+    // System.out.println(-Robot.getLimelightX());
+    return -Robot.getLimelightX();
   }
 }

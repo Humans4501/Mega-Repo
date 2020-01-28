@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -7,31 +7,23 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Shooter;
 
-/**
- * An example command that uses an example subsystem.
- */
-public class Drive extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveTrain m_subsystem;
-  private XboxController driver;
-
+public class Load extends CommandBase {
+  private final Shooter shooter;
+  private Joystick joystick1;
+  private Joystick joystick2;
   /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
+   * Creates a new Shoot.
    */
-  public Drive(DriveTrain subsystem, XboxController joystick1) {
-    m_subsystem = subsystem;
-    driver = joystick1;
+  public Load(Shooter subsystem, Joystick controller1, Joystick controller2) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    shooter = subsystem;
+    joystick1 = controller1;
+    joystick2 = controller2;
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -42,12 +34,14 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.drive(driver.getRawAxis(Constants.STICK_LY), driver.getRawAxis(Constants.STICK_LX), driver.getRawAxis(Constants.TRIGGER_R) - driver.getRawAxis(Constants.TRIGGER_L));
+    shooter.load(-1*joystick2.getRawAxis(3));
+    // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.shoot(0,0);
   }
 
   // Returns true when the command should end.
