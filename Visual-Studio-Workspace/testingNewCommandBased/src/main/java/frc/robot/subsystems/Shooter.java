@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
@@ -21,14 +22,14 @@ public class Shooter extends SubsystemBase {
    */
   WPI_TalonFX shooterLeft, shooterRight;
   Talon shooterTalonL, shooterTalonR;
-  Talon loader;
+  WPI_TalonSRX loader;
 
   public Shooter() {
     shooterLeft = new WPI_TalonFX(Constants.falcons1);
     shooterRight = new WPI_TalonFX(Constants.falcons2);
     shooterTalonL = new Talon(Constants.shoot1);
     shooterTalonR = new Talon(Constants.shoot2);
-    loader = new Talon(Constants.load);
+    loader = new WPI_TalonSRX(Constants.load);
     
     
   }

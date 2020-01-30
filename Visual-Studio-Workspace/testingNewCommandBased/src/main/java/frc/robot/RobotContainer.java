@@ -56,7 +56,7 @@ public class RobotContainer {
   public static final Joystick joystick2 = new Joystick(2);
   public static final XboxController xbox = new XboxController(0);
 
-  public final DriveTrain drivetrain = new DriveTrain();
+  public final static DriveTrain drivetrain = new DriveTrain();
   public final Shooter shooter = new Shooter();
   public final TestShooter2 testShooter2 = new TestShooter2();
   public final ShooterDesiredSpeedFalcon1 rpmFalcon1 = new ShooterDesiredSpeedFalcon1();

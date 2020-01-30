@@ -96,6 +96,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Lign of Sight1?", RobotContainer.los1.get());
     SmartDashboard.putBoolean("Lign of Sight2?", RobotContainer.los2.get());
 
+    SmartDashboard.putNumber("displacement x", RobotContainer.drivetrain.getPose().getTranslation().getX());
+    SmartDashboard.putNumber("displacement y", RobotContainer.drivetrain.getPose().getTranslation().getY());
+
     SmartDashboard.putNumber("distance", RobotContainer.lidar.getDistanceMeters());
 
     rpmFalcon1 = rpmFalcons1.getDouble(0);

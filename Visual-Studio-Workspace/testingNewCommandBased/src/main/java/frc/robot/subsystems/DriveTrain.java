@@ -36,6 +36,11 @@ public class DriveTrain extends SubsystemBase {
     backRight = new WPI_TalonFX(Constants.backRight);
     backLeft = new WPI_TalonFX(Constants.backLeft);
 
+    frontLeft.setInverted(true);
+    backLeft.setInverted(true);
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
+
     drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
     
@@ -62,7 +67,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double x, double y, double rotate) {
-    drive.driveCartesian(-x, -y, -rotate, -RobotContainer.ahrs.getAngle());
+    drive.driveCartesian(x, y, rotate);
+    // , -RobotContainer.ahrs.getAngle()
     
   }
 
