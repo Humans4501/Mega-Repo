@@ -86,18 +86,18 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("RPM Left Falcon1", (RobotContainer.falcon1.getSelectedSensorVelocity() * 600.0) / 2048.0);
     SmartDashboard.putNumber("RPM Right Falcon2",(RobotContainer.falcon2.getSelectedSensorVelocity() * 600.0) / 2048.0);
 
-    SmartDashboard.putNumber("angle", RobotContainer.ahrs.getAngle());
+    SmartDashboard.putNumber("angle", RobotContainer.ahrs.getYaw());
 
-    SmartDashboard.putNumber("frontLeft", RobotContainer.frontleft.getSelectedSensorPosition() * (7.2/2048));
-    SmartDashboard.putNumber("frontRight", RobotContainer.frontright.getSelectedSensorPosition() * (7.2/2048));
-    SmartDashboard.putNumber("backLeft", RobotContainer.frontleft.getSelectedSensorPosition() * (7.2/2048));
-    SmartDashboard.putNumber("backRight", RobotContainer.backright.getSelectedSensorPosition() * (7.2/2048));
+    SmartDashboard.putNumber("frontLeft", RobotContainer.frontleft.getSelectedSensorPosition() * (-0.10351972333/2048));
+    SmartDashboard.putNumber("frontRight", RobotContainer.frontright.getSelectedSensorPosition() * (0.10351972333/2048));
+    SmartDashboard.putNumber("backLeft", RobotContainer.backleft.getSelectedSensorPosition() * (-0.10351972333/2048));
+    SmartDashboard.putNumber("backRight", RobotContainer.backright.getSelectedSensorPosition() * (0.10351972333/2048));
 
     SmartDashboard.putBoolean("Lign of Sight1?", RobotContainer.los1.get());
     SmartDashboard.putBoolean("Lign of Sight2?", RobotContainer.los2.get());
 
-    SmartDashboard.putNumber("displacement x", RobotContainer.drivetrain.getPose().getTranslation().getX());
-    SmartDashboard.putNumber("displacement y", RobotContainer.drivetrain.getPose().getTranslation().getY());
+    // SmartDashboard.putNumber("displacement x", RobotContainer.drivetrain.getPose().getTranslation().getX());
+    // SmartDashboard.putNumber("displacement y", RobotContainer.drivetrain.getPose().getTranslation().getY());
 
     SmartDashboard.putNumber("distance", RobotContainer.lidar.getDistanceMeters());
 

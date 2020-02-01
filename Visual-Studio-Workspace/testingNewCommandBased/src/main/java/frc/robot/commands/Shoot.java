@@ -15,12 +15,12 @@ import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
   private final Shooter shooter;
-  private Joystick joystick1;
+  private XboxController joystick1;
   private Joystick joystick2;
   /**
    * Creates a new Shoot.
    */
-  public Shoot(Shooter subsystem, Joystick controller1, Joystick controller2) {
+  public Shoot(Shooter subsystem, XboxController controller1, Joystick controller2) {
     // Use addRequirements() here to declare subsystem dependencies.
     shooter = subsystem;
     joystick1 = controller1;
@@ -36,7 +36,7 @@ public class Shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shootTalon(joystick1.getRawAxis(2), joystick1.getRawAxis(2));
+    shooter.shootTalon(joystick1.getRawAxis(5), joystick1.getRawAxis(5));
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 

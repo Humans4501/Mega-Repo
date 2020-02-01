@@ -56,7 +56,7 @@ public class RobotContainer {
   public static final Joystick joystick2 = new Joystick(2);
   public static final XboxController xbox = new XboxController(0);
 
-  public final static DriveTrain drivetrain = new DriveTrain();
+  public final DriveTrain drivetrain = new DriveTrain();
   public final Shooter shooter = new Shooter();
   public final TestShooter2 testShooter2 = new TestShooter2();
   public final ShooterDesiredSpeedFalcon1 rpmFalcon1 = new ShooterDesiredSpeedFalcon1();
@@ -64,7 +64,7 @@ public class RobotContainer {
   public final LimelightAim limelightAim = new LimelightAim();
 
   public final Drive drive = new Drive(drivetrain, xbox);
-  public final Shoot shoot = new Shoot(shooter, joystick1, joystick2);
+  public final Shoot shoot = new Shoot(shooter, xbox, joystick2);
   public final Shoot2 shoot2 = new Shoot2(testShooter2, joystick1, joystick2);
   public final Load load = new Load(shooter, joystick1, joystick2);
   public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick1);

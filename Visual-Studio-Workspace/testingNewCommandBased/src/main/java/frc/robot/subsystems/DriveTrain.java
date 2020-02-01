@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveMotorVoltages;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -35,11 +36,6 @@ public class DriveTrain extends SubsystemBase {
     frontRight = new WPI_TalonFX(Constants.frontRight);
     backRight = new WPI_TalonFX(Constants.backRight);
     backLeft = new WPI_TalonFX(Constants.backLeft);
-
-    frontLeft.setInverted(true);
-    backLeft.setInverted(true);
-    frontRight.setInverted(true);
-    backRight.setInverted(true);
 
     drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
@@ -67,7 +63,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double x, double y, double rotate) {
-    drive.driveCartesian(x, y, rotate);
+    drive.driveCartesian(y, x, rotate);
     // , -RobotContainer.ahrs.getAngle()
     
   }
@@ -75,8 +71,14 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    wheelSpeeds = new MecanumDriveWheelSpeeds(RobotContainer.frontleft.getSelectedSensorVelocity() * (6.894413573858/2048), RobotContainer.frontright.getSelectedSensorVelocity() * (6.894413573858/2048), RobotContainer.backleft.getSelectedSensorVelocity() * (6.894413573858/2048), RobotContainer.backright.getSelectedSensorVelocity() * -(6.894413573858/2048));
+    wheelSpeeds = new MecanumDriveWheelSpeeds(RobotContainer.frontleft.getSelectedSensorVelocity() * (-0.10351972333/2048), RobotContainer.frontright.getSelectedSensorVelocity() * (0.10351972333/2048), RobotContainer.backleft.getSelectedSensorVelocity() * (-0.10351972333/2048), RobotContainer.backright.getSelectedSensorVelocity() * (0.10351972333/2048));
     m_odometry.update(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()),wheelSpeeds );
+    SmartDashboard.putNumber("displacement x", getPose().getTranslation().getX());
+    SmartDashboard.putNumber("displacement y", getPose().getTranslation().getY());
+    SmartDashboard.putNumber("frontleftWheelSpeed", wheelSpeeds.frontLeftMetersPerSecond);
+    SmartDashboard.putNumber("frontrightWheelSpeed", wheelSpeeds.frontRightMetersPerSecond);
+    SmartDashboard.putNumber("backleftWheelSpeed", wheelSpeeds.rearLeftMetersPerSecond);
+    SmartDashboard.putNumber("backrightWheelSpeed", wheelSpeeds.rearRightMetersPerSecond);
   }
 
   

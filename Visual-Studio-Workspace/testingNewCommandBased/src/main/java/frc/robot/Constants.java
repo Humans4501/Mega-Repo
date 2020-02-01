@@ -23,13 +23,13 @@ import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int frontLeft = 10;
+    public static int frontLeft = 13;
     public static int frontRight = 11;
     public static int backLeft = 12;
-    public static int backRight = 13;
+    public static int backRight = 10;
 
-    public static int shoot1 = 4;
-    public static int shoot2 = 5;
+    public static int shoot1 = 20;
+    public static int shoot2 = 21;
     public static int shoot3 = 6;
     public static int shoot4 = 7;
     public static int load = 1;

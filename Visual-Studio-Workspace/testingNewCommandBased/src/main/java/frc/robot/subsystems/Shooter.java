@@ -9,8 +9,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,14 +25,14 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   WPI_TalonFX shooterLeft, shooterRight;
-  Talon shooterTalonL, shooterTalonR;
+  CANSparkMax shooterTalonL, shooterTalonR;
   WPI_TalonSRX loader;
 
   public Shooter() {
     shooterLeft = new WPI_TalonFX(Constants.falcons1);
     shooterRight = new WPI_TalonFX(Constants.falcons2);
-    shooterTalonL = new Talon(Constants.shoot1);
-    shooterTalonR = new Talon(Constants.shoot2);
+    shooterTalonL = new CANSparkMax(Constants.shoot1, MotorType.kBrushless);
+    shooterTalonR = new CANSparkMax(Constants.shoot2, MotorType.kBrushless);
     loader = new WPI_TalonSRX(Constants.load);
     
     
@@ -52,7 +56,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     load(RobotContainer.joystick2.getRawAxis(3));
-    shootTalon(RobotContainer.joystick1.getRawAxis(2), RobotContainer.joystick1.getRawAxis(2));
+    shootTalon(RobotContainer.xbox.getRawAxis(5), RobotContainer.xbox.getRawAxis(5));
   }
 
 
