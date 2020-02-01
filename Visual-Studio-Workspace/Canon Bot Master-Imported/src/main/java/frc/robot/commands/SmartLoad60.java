@@ -32,7 +32,7 @@ public class SmartLoad60 extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.shooter.doneLoading(25);
+    return Robot.shooter.doneLoading(Robot.preassure);
   }
 
   // Called once after isFinished returns true

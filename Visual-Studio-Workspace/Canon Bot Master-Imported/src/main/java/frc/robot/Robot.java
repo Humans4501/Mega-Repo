@@ -7,9 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -17,7 +20,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterAim;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +33,9 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain = new DriveTrain();
   public static ShooterAim shooterAim = new ShooterAim();
   public static Shooter shooter = new Shooter();
+  ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
+  NetworkTableEntry preassureEntry;
+  public static double preassure;
   public static OI oi;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -62,6 +67,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Trigger Right", oi.getRightTrigger());
     SmartDashboard.putNumber("Trigger Left", oi.getLeftTrigger());
     SmartDashboard.putNumber("left xbox x", oi.getLeftXboxX());
+
+    preassureEntry = tab.add("Desired RPM Falcon1", 0).getEntry();
+    preassure = preassureEntry.getDouble(0);
   }
 
   /**

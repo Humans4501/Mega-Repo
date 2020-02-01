@@ -48,7 +48,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shootTalon(double speed1, double speed2){
-    shooterTalonL.set(speed1);
+    shooterTalonL.set(-speed1);
     shooterTalonR.set(speed2);
   }
 
@@ -61,8 +61,8 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
     load(RobotContainer.joystick2.getRawAxis(3));
     shootTalon(RobotContainer.xbox.getRawAxis(5), RobotContainer.xbox.getRawAxis(5));
-    SmartDashboard.putNumber("EncoderMax1 Position", encoderMax1.getPosition());
-    SmartDashboard.putNumber("EncoderMax2 Position", encoderMax2.getPosition());
+    SmartDashboard.putNumber("EncoderMax1 Rpm", (encoderMax1.getVelocity() * 600)/ (20 * 4096));
+    SmartDashboard.putNumber("EncoderMax2 Rpm", (encoderMax2.getPosition() * 600)/ (20 * 4096));
 
 
   }
