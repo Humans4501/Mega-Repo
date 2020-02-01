@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    preassureEntry = tab.add("Desired RPM Falcon1", 0).getEntry();
   }
 
   /**
@@ -68,7 +69,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Trigger Left", oi.getLeftTrigger());
     SmartDashboard.putNumber("left xbox x", oi.getLeftXboxX());
 
-    preassureEntry = tab.add("Desired RPM Falcon1", 0).getEntry();
+    
     preassure = preassureEntry.getDouble(0);
   }
 
