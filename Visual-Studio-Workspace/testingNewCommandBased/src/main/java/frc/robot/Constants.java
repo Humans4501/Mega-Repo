@@ -33,9 +33,17 @@ public final class Constants {
     public static int shoot3 = 6;
     public static int shoot4 = 7;
     public static int load = 1;
+    public static int index = 2;
 
     public static int falcons1 = 5;
     public static int falcons2 = 6;
+
+    public static int losCon1 = 0;
+    public static int losCon2 = 1;
+    public static int losCon3 = 2;
+    public static int losCon4 = 3;
+    public static int losCon5 = 4;
+
     
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;

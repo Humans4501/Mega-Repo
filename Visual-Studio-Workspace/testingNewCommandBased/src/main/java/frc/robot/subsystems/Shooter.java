@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
@@ -29,16 +30,13 @@ public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterLeft, shooterRight;
   CANSparkMax shooterTalonL, shooterTalonR;
   WPI_TalonSRX loader;
-  CANEncoder encoderMax1, encoderMax2;
 
   public Shooter() {
     shooterLeft = new WPI_TalonFX(Constants.falcons1);
     shooterRight = new WPI_TalonFX(Constants.falcons2);
-    shooterTalonL = new CANSparkMax(Constants.shoot1, MotorType.kBrushless);
-    shooterTalonR = new CANSparkMax(Constants.shoot2, MotorType.kBrushless);
+
     loader = new WPI_TalonSRX(Constants.load);
-    encoderMax1 = shooterTalonL.getEncoder();
-    encoderMax2 = shooterTalonR.getEncoder();
+
     
   }
 
@@ -47,10 +45,7 @@ public class Shooter extends SubsystemBase {
     shooterRight.set(speed2);
   }
 
-  public void shootTalon(double speed1, double speed2){
-    shooterTalonL.set(-speed1);
-    shooterTalonR.set(speed2);
-  }
+
 
   public void load(double speed){
     loader.set(speed);
@@ -60,9 +55,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     load(RobotContainer.joystick2.getRawAxis(3));
-    shootTalon(RobotContainer.xbox.getRawAxis(5), RobotContainer.xbox.getRawAxis(5));
-    SmartDashboard.putNumber("EncoderMax1 Rpm", (encoderMax1.getVelocity() * 600)/ (20 * 4096));
-    SmartDashboard.putNumber("EncoderMax2 Rpm", (encoderMax2.getPosition() * 600)/ (20 * 4096));
+
 
 
   }

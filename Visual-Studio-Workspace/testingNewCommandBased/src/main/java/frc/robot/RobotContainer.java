@@ -58,17 +58,19 @@ public class RobotContainer {
 
   public final DriveTrain drivetrain = new DriveTrain();
   public final Shooter shooter = new Shooter();
-  public final TestShooter2 testShooter2 = new TestShooter2();
   public final ShooterDesiredSpeedFalcon1 rpmFalcon1 = new ShooterDesiredSpeedFalcon1();
   public final ShooterDesiredSpeedFalcon2 rpmFalcon2 = new ShooterDesiredSpeedFalcon2();
   public final LimelightAim limelightAim = new LimelightAim();
+  public final Conveyor conveyor = new Conveyor();
 
   public final Drive drive = new Drive(drivetrain, xbox);
-  public final Shoot shoot = new Shoot(shooter, xbox, joystick2);
-  public final Shoot2 shoot2 = new Shoot2(testShooter2, joystick1, joystick2);
+  // public final Shoot shoot = new Shoot(shooter, xbox, joystick2);
   public final Load load = new Load(shooter, joystick1, joystick2);
   public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick1);
   public final Aim aim = new Aim(drivetrain, limelightAim);
+  public final ConveyorForward conveyorForward = new ConveyorForward(conveyor);
+  public final ConveyorStop conveyorStop = new ConveyorStop(conveyor);
+  public final ConveyorShoot conveyorShoot = new ConveyorShoot(conveyor);
 
   public static final TalonFX falcon1 = new TalonFX(Constants.falcons1);
   public static final TalonFX falcon2 = new TalonFX(Constants.falcons2);
@@ -78,9 +80,7 @@ public class RobotContainer {
   public static final TalonFX backright = new TalonFX(Constants.backRight);
 
   public static AHRS ahrs = new AHRS(Port.kMXP);
-  public static DigitalInput los1 = new DigitalInput(0);
-  public static DigitalInput los2 = new DigitalInput(1);
-  public static Lasershark lidar = new Lasershark(2);
+  public static Lasershark lidar = new Lasershark(9);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -88,6 +88,8 @@ public class RobotContainer {
 
   private final JoystickButton trigger = new JoystickButton(joystick1, 1);
   private JoystickButton aimLimelight = new JoystickButton(xbox, Constants.A);
+  private JoystickButton convey = new JoystickButton(xbox, Constants.B);
+  private JoystickButton conveyShoot = new JoystickButton(xbox, Constants.Y);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -101,8 +103,11 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    trigger.whileHeld(new Shoot2(testShooter2, joystick1, joystick2));
     aimLimelight.whileHeld(new Aim(drivetrain, limelightAim));
+    convey.whileHeld(new ConveyorForward(conveyor));
+    convey.whenReleased(new ConveyorStop(conveyor));
+    conveyShoot.whileHeld(new ConveyorShoot(conveyor));
+    conveyShoot.whenReleased(new ConveyorStop(conveyor));
   }
 
   /**

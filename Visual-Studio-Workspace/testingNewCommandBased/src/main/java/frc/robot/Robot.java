@@ -93,9 +93,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("backLeft", RobotContainer.backleft.getSelectedSensorPosition() * (-0.10351972333/2048));
     SmartDashboard.putNumber("backRight", RobotContainer.backright.getSelectedSensorPosition() * (0.10351972333/2048));
 
-    SmartDashboard.putBoolean("Lign of Sight1?", RobotContainer.los1.get());
-    SmartDashboard.putBoolean("Lign of Sight2?", RobotContainer.los2.get());
-
     // SmartDashboard.putNumber("displacement x", RobotContainer.drivetrain.getPose().getTranslation().getX());
     // SmartDashboard.putNumber("displacement y", RobotContainer.drivetrain.getPose().getTranslation().getY());
 
