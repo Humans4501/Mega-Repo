@@ -32,8 +32,8 @@ public final class Constants {
     public static int shoot2 = 21;
     public static int shoot3 = 6;
     public static int shoot4 = 7;
-    public static int load = 1;
-    public static int index = 2;
+    public static int load = 14;
+    public static int index = 15;
 
     public static int falcons1 = 5;
     public static int falcons2 = 6;

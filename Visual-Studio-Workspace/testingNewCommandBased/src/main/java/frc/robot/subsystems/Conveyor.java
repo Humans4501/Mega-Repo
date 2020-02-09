@@ -63,7 +63,7 @@ public class Conveyor extends SubsystemBase {
     if(!los5.get()){
       speed2 = 0;
     }
-    if(!los2.get() || !los1.get()){
+    if(!los2.get()){
       speed3 = 0;
     }
 

@@ -29,7 +29,7 @@ public class ConveyorForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.convey(0.75, 0.75, 0.75);
+    conveyor.convey(0.75, 0.75, 1);
   }
 
   // Called once the command ends or is interrupted.
