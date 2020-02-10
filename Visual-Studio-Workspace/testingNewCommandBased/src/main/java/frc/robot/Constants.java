@@ -35,8 +35,8 @@ public final class Constants {
     public static int load = 14;
     public static int index = 15;
 
-    public static int falcons1 = 5;
-    public static int falcons2 = 6;
+    public static int falcons1 = 5; //left
+    public static int falcons2 = 6; //right
 
     public static int losCon1 = 0;
     public static int losCon2 = 1;
