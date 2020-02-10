@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import java.time.*;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +29,7 @@ public class Conveyor extends SubsystemBase {
   WPI_TalonSRX indexer;
   CANEncoder encoderMax1, encoderMax2;
   DigitalInput los1, los2, los3, los4, los5;
+  long time1;
   
   public Conveyor() {
     conveyorSpark1 = new CANSparkMax(Constants.shoot1, MotorType.kBrushless);
@@ -85,6 +87,10 @@ public class Conveyor extends SubsystemBase {
     indexer.set(speed3);
     conveyorSpark1.set(-speed1);
     conveyorSpark2.set(-speed2);
+  }
+  
+  public void startTime(){
+    time1 = System.currentTimeMillis();
   }
 
   @Override
