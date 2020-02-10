@@ -29,7 +29,7 @@ public class ConveyorShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.conveyShoot(1, 1, 1);
+    conveyor.conveyShoot(1, 1, 0.75);
   }
 
   // Called once the command ends or is interrupted.

@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
-public class Load extends CommandBase {
+public class LoadStop extends CommandBase {
   private final Intake intake;
   /**
    * Creates a new Shoot.
    */
-  public Load(Intake subsystem) {
+  public LoadStop(Intake subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     intake = subsystem;
     addRequirements(intake);
@@ -31,7 +31,7 @@ public class Load extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.load(-0.8);
+    intake.load(0);
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 

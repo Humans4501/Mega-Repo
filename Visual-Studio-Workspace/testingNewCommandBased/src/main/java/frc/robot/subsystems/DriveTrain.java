@@ -63,7 +63,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double x, double y, double rotate) {
-    // drive.driveCartesian(y, x, rotate);
+    drive.driveCartesian(y, x, rotate);
     // , -RobotContainer.ahrs.getAngle()
     
   }

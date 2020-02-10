@@ -78,6 +78,9 @@ public class Conveyor extends SubsystemBase {
       speed1 = 0;
       speed3 = 0;
     }
+    if(!los1.get() || !los2.get()){
+      speed3 = 0;
+    }
 
     indexer.set(speed3);
     conveyorSpark1.set(-speed1);
