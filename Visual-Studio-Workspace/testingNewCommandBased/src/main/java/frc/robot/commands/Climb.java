@@ -7,20 +7,23 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
+import frc.robot.subsystems.Climber;
 
-public class Load extends CommandBase {
-  private final Intake intake;
+public class Climb extends CommandBase {
   /**
-   * Creates a new Shoot.
+   * Creates a new climb.
    */
-  public Load(Intake subsystem) {
+
+  Climber climber;
+  XboxController controller;
+  public Climb(Climber subsystem, XboxController xbox) {
+    climber = subsystem;
+    controller = xbox;
+    addRequirements(climber);
     // Use addRequirements() here to declare subsystem dependencies.
-    intake = subsystem;
-    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -31,14 +34,13 @@ public class Load extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.load(-0.8);
-    // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
+    climber.climb(controller.getRawAxis(Constants.STICK_LY), controller.getRawAxis(Constants.STICK_RY));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.load(0);
+    climber.climb(0,0);
   }
 
   // Returns true when the command should end.

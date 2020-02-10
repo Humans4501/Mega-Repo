@@ -52,8 +52,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  public static final Joystick joystick1 = new Joystick(1);
-  public static final Joystick joystick2 = new Joystick(2);
+  public static final XboxController xbox2 = new XboxController(1);
   public static final XboxController xbox = new XboxController(0);
 
   public final DriveTrain drivetrain = new DriveTrain();
@@ -62,15 +61,14 @@ public class RobotContainer {
   public final ShooterDesiredSpeedFalcon2 rpmFalcon2 = new ShooterDesiredSpeedFalcon2();
   public final LimelightAim limelightAim = new LimelightAim();
   public final Conveyor conveyor = new Conveyor();
+  public final Intake intake_sub = new Intake();
+  public final Climber climber = new Climber();
 
   public final Drive drive = new Drive(drivetrain, xbox);
+  public final Climb climb = new Climb(climber, xbox2);
+  // public final Aim aim = new Aim(drivetrain, limelightAim);
+  // public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2);
   // public final Shoot shoot = new Shoot(shooter, xbox, joystick2);
-  public final Load load = new Load(shooter, joystick1, joystick2);
-  public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, joystick1);
-  public final Aim aim = new Aim(drivetrain, limelightAim);
-  public final ConveyorForward conveyorForward = new ConveyorForward(conveyor);
-  public final ConveyorStop conveyorStop = new ConveyorStop(conveyor);
-  public final ConveyorShoot conveyorShoot = new ConveyorShoot(conveyor);
 
   public static final TalonFX falcon1 = new TalonFX(Constants.falcons1);
   public static final TalonFX falcon2 = new TalonFX(Constants.falcons2);
@@ -86,10 +84,11 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
 
-  private final JoystickButton trigger = new JoystickButton(joystick1, 1);
   private JoystickButton aimLimelight = new JoystickButton(xbox, Constants.A);
   private JoystickButton convey = new JoystickButton(xbox, Constants.B);
   private JoystickButton conveyShoot = new JoystickButton(xbox, Constants.Y);
+  private JoystickButton intake = new JoystickButton(xbox, Constants.X);
+  private JoystickButton shoot = new JoystickButton(xbox, Constants.BACK);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -108,6 +107,11 @@ public class RobotContainer {
     convey.whenReleased(new ConveyorStop(conveyor));
     conveyShoot.whileHeld(new ConveyorShoot(conveyor));
     conveyShoot.whenReleased(new ConveyorStop(conveyor));
+    intake.whileHeld(new Load(intake_sub));
+    intake.whenReleased(new LoadStop(intake_sub));
+    shoot.whileHeld(new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2));
+    // shoot.whenReleased(new ShootStop(shooter));
+
   }
 
   /**

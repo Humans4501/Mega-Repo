@@ -62,8 +62,13 @@ public class DriveTrain extends SubsystemBase {
     backRight.setVoltage(volts.rearRightVoltage);
   }
 
+<<<<<<< HEAD
   public void drive(double x, double y, double rotate) {
     drive.driveCartesian(y, -x, rotate);
+=======
+  public void drive(double y, double x, double rotate) {
+    drive.driveCartesian(-y, x, rotate);
+>>>>>>> c57e98b2900a7373ea780c18f1b0a9180437a665
     // , -RobotContainer.ahrs.getAngle()
     
   }

@@ -20,39 +20,43 @@ public class ShootFalcon extends CommandBase {
   private final Shooter shooter;
   private final ShooterDesiredSpeedFalcon1 pidF1;
   private final ShooterDesiredSpeedFalcon2 pidF2;
-  private Joystick joystick;
   /**
    * Creates a new Shoot.
    */
-  public ShootFalcon(Shooter subsystem, ShooterDesiredSpeedFalcon1 pIDF1, ShooterDesiredSpeedFalcon2 pIDF2, Joystick controller) {
+  public ShootFalcon(Shooter subsystem, ShooterDesiredSpeedFalcon1 pIDF1, ShooterDesiredSpeedFalcon2 pIDF2) {
     // Use addRequirements() here to declare subsystem dependencies.
     shooter = subsystem;
     pidF1 = pIDF1;
     pidF2 = pIDF2;
-    joystick = controller;
     addRequirements(shooter);
-    pidF1.enable();
-    pidF2.enable();
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    pidF1.setSetpoint(-Robot.rpmFalcon1);
+    pidF2.setSetpoint(Robot.rpmFalcon2);
+    pidF1.enable();
+    pidF2.enable();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    pidF1.setSetpoint(-Robot.rpmFalcon1);
-    pidF2.setSetpoint(Robot.rpmFalcon2);
+    // SmartDashboard.putNumber("output", pidF1.currOutput);
     shooter.shoot(pidF1.currOutput, pidF2.currOutput);
-    // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
-  }
+
+  } 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.shoot(0,0);
+    pidF1.disable();
+    pidF2.disable();
+    
   }
 
   // Returns true when the command should end.
