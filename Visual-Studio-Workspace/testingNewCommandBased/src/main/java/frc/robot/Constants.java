@@ -30,8 +30,8 @@ public final class Constants {
 
     public static int shoot1 = 20;
     public static int shoot2 = 21;
-    public static int shoot3 = 6;
-    public static int shoot4 = 7;
+    public static int climb1 = 16;
+    public static int climb2 = 17;
     public static int load = 14;
     public static int index = 15;
 
@@ -80,7 +80,7 @@ public final class Constants {
 			STICK_RX = 4, STICK_RY = 5;
     public static final int TRIGGER = 1, BUTTON_2 = 2, BUTTON_3 = 3, BUTTON_4 = 4, BUTTON_5 = 5, BUTTON_6 = 6,
 			BUTTON_7 = 7, BUTTON_8 = 8, BUTTON_9 = 9, BUTTON_10 = 10, BUTTON_11 = 11;
-    public static final int X = 3,  A = 1, Y = 4, B = 2, RB = 8, RT = 10, LB = 7, LT = 9, START = 12;
+    public static final int X = 3,  A = 1, Y = 4, B = 2, RB = 6, RS = 10, LB = 5, LS = 9, START = 8, BACK = 7;
     
 
 

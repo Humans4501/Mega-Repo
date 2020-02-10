@@ -22,6 +22,9 @@ public class Drive extends CommandBase {
   private final DriveTrain m_subsystem;
   private XboxController driver;
 
+  private double deadzone = 0.1;
+  private double x;
+  private double y;
   /**
    * Creates a new ExampleCommand.
    *
@@ -42,7 +45,17 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.drive(driver.getRawAxis(Constants.STICK_LY), driver.getRawAxis(Constants.STICK_LX), driver.getRawAxis(Constants.TRIGGER_L) - driver.getRawAxis(Constants.TRIGGER_R));
+    if(Math.abs(driver.getRawAxis(Constants.STICK_LY)) < deadzone){
+      x = 0;
+    }else{
+      x = driver.getRawAxis(Constants.STICK_LY);
+    }
+    if(Math.abs(driver.getRawAxis(Constants.STICK_LX)) < deadzone){
+      y = 0;
+    }else{
+      y = driver.getRawAxis(Constants.STICK_LX);
+    }
+    m_subsystem.drive(y, x, driver.getRawAxis(Constants.TRIGGER_L) - driver.getRawAxis(Constants.TRIGGER_R));
   }
 
   // Called once the command ends or is interrupted.
