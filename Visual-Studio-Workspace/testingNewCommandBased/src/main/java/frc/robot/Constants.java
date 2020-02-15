@@ -31,9 +31,10 @@ public final class Constants {
     public static int shoot1 = 20;
     public static int shoot2 = 21;
     public static int climb1 = 16;
-    public static int climb2 = 17;
-    public static int load = 14;
+    public static int climb2 = 14;
+    public static int load = 18;
     public static int index = 15;
+    public static int elevator = 17;
 
     public static int falcons1 = 5; //left
     public static int falcons2 = 6; //right
