@@ -54,7 +54,7 @@ public class Drive extends CommandBase {
       y = driver.getRawAxis(Constants.STICK_LX);
     }
     // m_subsystem.drive(y, x, driver.getRawAxis(Constants.TRIGGER_L) - driver.getRawAxis(Constants.TRIGGER_R));
-    m_subsystem.drive2(driver.getRawAxis(Constants.TRIGGER_L) - driver.getRawAxis(Constants.TRIGGER_R), driver.getRawAxis(Constants.STICK_LX));
+    m_subsystem.drive2(driver.getRawAxis(Constants.TRIGGER_R) - driver.getRawAxis(Constants.TRIGGER_L), driver.getRawAxis(Constants.STICK_LX));
   }
 
   // Called once the command ends or is interrupted.

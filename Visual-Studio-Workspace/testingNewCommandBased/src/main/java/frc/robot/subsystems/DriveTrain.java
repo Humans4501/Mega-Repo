@@ -41,9 +41,6 @@ public class DriveTrain extends SubsystemBase {
     left2 = new WPI_TalonFX(Constants.left2);
     right2 = new WPI_TalonFX(Constants.right2);
 
-    left2.setInverted(true);
-    right2.setInverted(true);
-
     // drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
 
