@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,12 +18,13 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   WPI_TalonFX shooterLeft, shooterRight;
+  WPI_TalonSRX aimer;
   CANSparkMax shooterTalonL, shooterTalonR;
 
   public Shooter() {
     shooterLeft = new WPI_TalonFX(Constants.falcons1);
     shooterRight = new WPI_TalonFX(Constants.falcons2);
-
+    aimer = new WPI_TalonSRX(Constants.elevator);
     
   }
 
@@ -30,6 +32,10 @@ public class Shooter extends SubsystemBase {
     // System.out.println(speed1);
     shooterLeft.set(speed1);
     shooterRight.set(speed2);
+  }
+
+  public void aim(double speed){
+    aimer.set(-speed);
   }
 
   @Override

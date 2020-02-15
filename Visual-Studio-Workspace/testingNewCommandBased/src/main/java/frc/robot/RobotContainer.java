@@ -54,6 +54,7 @@ public class RobotContainer {
 
   public final Drive drive = new Drive(drivetrain, xbox);
   public final Climb climb = new Climb(climber, xbox2);
+  public final Elevate elevate = new Elevate(shooter, xbox);
   // public final Aim aim = new Aim(drivetrain, limelightAim);
   // public final ShootFalcon shootFalcon = new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2);
   // public final Shoot shoot = new Shoot(shooter, xbox, joystick2);

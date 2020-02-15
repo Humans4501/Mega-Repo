@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -23,6 +25,7 @@ import frc.robot.RobotContainer;
 
 public class DriveTrain extends SubsystemBase {
   MecanumDrive drive;
+  DifferentialDrive drive2;
   WPI_TalonFX frontLeft, frontRight, backLeft, backRight;
   MecanumDriveOdometry m_odometry;
   MecanumDriveWheelSpeeds wheelSpeeds;
@@ -38,8 +41,8 @@ public class DriveTrain extends SubsystemBase {
 
     drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
-    
 
+    drive2 = new DifferentialDrive(new SpeedControllerGroup(frontLeft, backLeft), new SpeedControllerGroup(frontRight, backRight));
   }
 
   public MecanumDriveKinematics getkinematics(){
@@ -65,6 +68,9 @@ public class DriveTrain extends SubsystemBase {
     drive.driveCartesian(-y, x, rotate*0.5);
     // , -RobotContainer.ahrs.getAngle()
     
+  }
+  public void drive2(double speed, double rotate){
+    drive2.arcadeDrive(speed, rotate);
   }
 
   @Override
