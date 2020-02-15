@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.drivetrain, m_robotContainer.drive);
     CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.climber, m_robotContainer.climb);
-    CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.shooter, m_robotContainer.elevate);
+    // CommandScheduler.getInstance().setDefaultCommand(m_robotContainer.shooter, m_robotContainer.elevate);
 
     rpmFalcons1 = tab.add("Desired RPM Falcon1", 0).getEntry();
     rpmFalcons2 = tab.add("Desired RPM Falcon2", 0).getEntry();
