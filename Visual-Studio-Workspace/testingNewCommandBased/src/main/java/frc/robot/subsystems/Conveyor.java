@@ -96,8 +96,8 @@ public class Conveyor extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // convey(RobotContainer.xbox.getRawAxis(5), RobotContainer.xbox.getRawAxis(1));
-    SmartDashboard.putNumber("EncoderMax1 Rpm", (encoderMax1.getVelocity() * 600)/ (20 * 4096));
-    SmartDashboard.putNumber("EncoderMax2 Rpm", (encoderMax2.getVelocity() * 600)/ (20 * 4096));
+    // SmartDashboard.putNumber("EncoderMax1 Rpm", (encoderMax1.getVelocity() * 600)/ (20 * 4096));
+    // SmartDashboard.putNumber("EncoderMax2 Rpm", (encoderMax2.getVelocity() * 600)/ (20 * 4096));
     SmartDashboard.putBoolean("LOS1", los1.get());
     SmartDashboard.putBoolean("LOS2", los2.get());
     SmartDashboard.putBoolean("LOS3", los3.get());

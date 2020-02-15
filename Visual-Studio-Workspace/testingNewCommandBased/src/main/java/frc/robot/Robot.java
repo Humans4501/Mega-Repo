@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    // @SuppressWarnings({});
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled
     // commands, running already-scheduled commands, removing finished or
@@ -101,8 +102,6 @@ public class Robot extends TimedRobot {
 
     rpmFalcon1 = rpmFalcons1.getDouble(0);
     rpmFalcon2 = rpmFalcons2.getDouble(0);
-    rpmFalcons1.equals(rpmFalcon1);
-    rpmFalcons2.equals(rpmFalcon2);
     limelightX = limelightTX.getDouble(0.0);
     limelightA = limelightTA.getDouble(0.0);
 

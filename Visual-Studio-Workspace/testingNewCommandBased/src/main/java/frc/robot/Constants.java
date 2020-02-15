@@ -27,6 +27,8 @@ public final class Constants {
     public static int frontRight = 11;
     public static int backLeft = 12;
     public static int backRight = 10;
+    public static int left2 = 20;
+    public static int right2 = 19;
 
     public static int shoot1 = 20;
     public static int shoot2 = 21;

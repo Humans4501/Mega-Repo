@@ -26,7 +26,7 @@ import frc.robot.RobotContainer;
 public class DriveTrain extends SubsystemBase {
   MecanumDrive drive;
   DifferentialDrive drive2;
-  WPI_TalonFX frontLeft, frontRight, backLeft, backRight;
+  WPI_TalonFX frontLeft, frontRight, backLeft, backRight, left2, right2;
   MecanumDriveOdometry m_odometry;
   MecanumDriveWheelSpeeds wheelSpeeds;
 
@@ -38,11 +38,16 @@ public class DriveTrain extends SubsystemBase {
     frontRight = new WPI_TalonFX(Constants.frontRight);
     backRight = new WPI_TalonFX(Constants.backRight);
     backLeft = new WPI_TalonFX(Constants.backLeft);
+    left2 = new WPI_TalonFX(Constants.left2);
+    right2 = new WPI_TalonFX(Constants.right2);
 
-    drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+    left2.setInverted(true);
+    right2.setInverted(true);
+
+    // drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
 
-    drive2 = new DifferentialDrive(new SpeedControllerGroup(frontLeft, backLeft), new SpeedControllerGroup(frontRight, backRight));
+    drive2 = new DifferentialDrive(left2, right2);
   }
 
   public MecanumDriveKinematics getkinematics(){
@@ -65,7 +70,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double y, double x, double rotate) {
-    drive.driveCartesian(-y, x, rotate*0.5);
+    // drive.driveCartesian(-y, x, rotate*0.5);
     // , -RobotContainer.ahrs.getAngle()
     
   }
