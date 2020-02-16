@@ -44,7 +44,7 @@ public class DriveTrain extends SubsystemBase {
     // drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
 
-    drive2 = new DifferentialDrive(left2, right2);
+    drive2 = new DifferentialDrive(new SpeedControllerGroup(left2, frontRight), new SpeedControllerGroup(right2, backRight));
   }
 
   public MecanumDriveKinematics getkinematics(){
