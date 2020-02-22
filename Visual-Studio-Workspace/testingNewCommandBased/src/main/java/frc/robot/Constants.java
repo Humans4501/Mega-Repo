@@ -9,8 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -75,9 +77,8 @@ public final class Constants {
     static Translation2d m_frontRightLocation = new Translation2d(0.2794, -0.315722);
     static Translation2d m_backLeftLocation = new Translation2d(-0.2794, 0.315722);
     static Translation2d m_backRightLocation = new Translation2d(-0.2794, -0.315722);
-    public static MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation,
-            m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
-
+    public static DifferentialDriveKinematics differentialDriveKinematics = new DifferentialDriveKinematics(Units.inchesToMeters(27));
+    
     public static final int STICK_LX = 0, STICK_LY = 1,
 			TRIGGER_L = 2, TRIGGER_R = 3,
 			STICK_RX = 4, STICK_RY = 5;

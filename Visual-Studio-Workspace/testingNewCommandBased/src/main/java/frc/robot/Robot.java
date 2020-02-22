@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -87,8 +88,10 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("RPM Left Falcon1", (RobotContainer.falcon1.getSelectedSensorVelocity() * 600.0) / 2048.0);
     SmartDashboard.putNumber("RPM Right Falcon2",(RobotContainer.falcon2.getSelectedSensorVelocity() * 600.0) / 2048.0);
+    SmartDashboard.putNumber("robot voltage", RobotContainer.pdp.getVoltage());
+    SmartDashboard.putNumber("current of right falcon", RobotContainer.pdp.getCurrent(0));
 
-    SmartDashboard.putNumber("angle", RobotContainer.ahrs.getYaw());
+    SmartDashboard.putNumber("angle", RobotContainer.ahrs.getAngle());
 
     SmartDashboard.putNumber("frontLeft", RobotContainer.frontleft.getSelectedSensorPosition() * (-0.10351972333/2048));
     SmartDashboard.putNumber("frontRight", RobotContainer.frontright.getSelectedSensorPosition() * (0.10351972333/2048));
@@ -136,6 +139,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    m_robotContainer.drivetrain.resetOdometry();
   }
 
   /**
@@ -159,6 +163,7 @@ public class Robot extends TimedRobot {
     RobotContainer.frontright.setSelectedSensorPosition(0);
     RobotContainer.backleft.setSelectedSensorPosition(0);
     RobotContainer.backright.setSelectedSensorPosition(0);
+    m_robotContainer.drivetrain.resetOdometry();
   }
 
   /**

@@ -8,44 +8,35 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.LimelightAim;
+import frc.robot.subsystems.Intake;
 
-public class Aim extends CommandBase {
-
-  DriveTrain driveTrain;
-  LimelightAim limeLightAim;
+public class IntakeReverse extends CommandBase {
+  private final Intake intake;
   /**
-   * Creates a new Aim.
+   * Creates a new Shoot.
    */
-  public Aim(DriveTrain drivetrain, LimelightAim limelightAim) {
+  public IntakeReverse (Intake subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    driveTrain = drivetrain;
-    limeLightAim = limelightAim;
-    addRequirements(drivetrain, limelightAim);
-    
+    intake = subsystem;
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    limeLightAim.setSetpoint(0);
-    limeLightAim.enable();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    driveTrain.drive2(0,limeLightAim.currOutput);
-    // System.out.println("I am running");
+    intake.load(0.8);
+    // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.drive2(0,0);
-    limeLightAim.disable();
+    intake.load(0);
   }
 
   // Returns true when the command should end.

@@ -8,12 +8,16 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveMotorVoltages;
 import edu.wpi.first.wpilibj.kinematics.MecanumDriveOdometry;
@@ -27,8 +31,10 @@ public class DriveTrain extends SubsystemBase {
   MecanumDrive drive;
   DifferentialDrive drive2;
   WPI_TalonFX frontLeft, frontRight, backLeft, backRight, left2, right2;
-  MecanumDriveOdometry m_odometry;
-  MecanumDriveWheelSpeeds wheelSpeeds;
+  DifferentialDriveOdometry m_odometry;
+  DifferentialDriveWheelSpeeds wheelSpeeds;
+  CANCoder left, right;
+  
 
   /**
    * Creates a new ExampleSubsystem.
@@ -41,22 +47,25 @@ public class DriveTrain extends SubsystemBase {
     left2 = new WPI_TalonFX(Constants.left2);
     right2 = new WPI_TalonFX(Constants.right2);
 
-    // drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-    m_odometry = new MecanumDriveOdometry(Constants.m_kinematics, Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(2, -2, new Rotation2d()));
+    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(0, 0, new Rotation2d()));
 
     drive2 = new DifferentialDrive(new SpeedControllerGroup(left2, frontRight), new SpeedControllerGroup(right2, backRight));
   }
 
-  public MecanumDriveKinematics getkinematics(){
-    return Constants.m_kinematics;
+  public DifferentialDriveKinematics getkinematics(){
+    return Constants.differentialDriveKinematics;
   }
 
-  public MecanumDriveWheelSpeeds getWheelSpeeds() {
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return wheelSpeeds;
   }
 
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
+  }
+
+  public void resetOdometry(){
+    m_odometry.resetPosition(new Pose2d(0, 0, new Rotation2d()), new Rotation2d());
   }
 
   public void setDriveSpeedControllersVolts(MecanumDriveMotorVoltages volts) {
@@ -65,12 +74,6 @@ public class DriveTrain extends SubsystemBase {
     frontRight.setVoltage(volts.frontRightVoltage);
     backRight.setVoltage(volts.rearRightVoltage);
   }
-
-  public void drive(double y, double x, double rotate) {
-    // drive.driveCartesian(-y, x, rotate*0.5);
-    // , -RobotContainer.ahrs.getAngle()
-    
-  }
   public void drive2(double speed, double rotate){
     drive2.arcadeDrive(speed, rotate);
   }
@@ -78,14 +81,10 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    wheelSpeeds = new MecanumDriveWheelSpeeds(RobotContainer.frontleft.getSelectedSensorVelocity() * (-0.10351972333/2048), RobotContainer.frontright.getSelectedSensorVelocity() * (0.10351972333/2048), RobotContainer.backleft.getSelectedSensorVelocity() * (-0.10351972333/2048), RobotContainer.backright.getSelectedSensorVelocity() * (0.10351972333/2048));
-    m_odometry.update(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()),wheelSpeeds );
+    wheelSpeeds = new DifferentialDriveWheelSpeeds(RobotContainer.frontright.getSelectedSensorVelocity() * 0.0002032858, RobotContainer.backright.getSelectedSensorVelocity() * 0.0002032858);
+    m_odometry.update(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()),RobotContainer.frontright.getSelectedSensorPosition() * 0.00002032858, RobotContainer.backright.getSelectedSensorPosition() * -0.00002032858);
     SmartDashboard.putNumber("displacement x", getPose().getTranslation().getX());
     SmartDashboard.putNumber("displacement y", getPose().getTranslation().getY());
-    SmartDashboard.putNumber("frontleftWheelSpeed", wheelSpeeds.frontLeftMetersPerSecond);
-    SmartDashboard.putNumber("frontrightWheelSpeed", wheelSpeeds.frontRightMetersPerSecond);
-    SmartDashboard.putNumber("backleftWheelSpeed", wheelSpeeds.rearLeftMetersPerSecond);
-    SmartDashboard.putNumber("backrightWheelSpeed", wheelSpeeds.rearRightMetersPerSecond);
   }
 
   

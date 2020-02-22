@@ -14,6 +14,7 @@ import com.cuforge.libcu.Lasershark;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -65,6 +66,7 @@ public class RobotContainer {
   public static final TalonFX frontright = new TalonFX(Constants.frontRight);
   public static final TalonFX backleft = new TalonFX(Constants.backLeft);
   public static final TalonFX backright = new TalonFX(Constants.backRight);
+  public static final PowerDistributionPanel pdp = new PowerDistributionPanel(60);
 
   public static AHRS ahrs = new AHRS(Port.kMXP);
   public static Lasershark lidar = new Lasershark(9);
@@ -73,11 +75,13 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
 
-  private JoystickButton aimLimelight = new JoystickButton(xbox, Constants.A);
-  private JoystickButton convey = new JoystickButton(xbox, Constants.B);
+  private JoystickButton aimLimelight = new JoystickButton(xbox, Constants.LB);
+  private JoystickButton convey = new JoystickButton(xbox2, Constants.RB);
   private JoystickButton conveyShoot = new JoystickButton(xbox, Constants.Y);
-  private JoystickButton intake = new JoystickButton(xbox, Constants.X);
-  private JoystickButton shoot = new JoystickButton(xbox, Constants.BACK);
+  private JoystickButton intake = new JoystickButton(xbox2, Constants.LB);
+  private JoystickButton intake2 = new JoystickButton(xbox, Constants.A);
+  private JoystickButton shoot = new JoystickButton(xbox, Constants.RB);
+  private JoystickButton intakeReverse = new JoystickButton(xbox2, Constants.B);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -98,7 +102,11 @@ public class RobotContainer {
     conveyShoot.whenReleased(new ConveyorStop(conveyor));
     intake.whileHeld(new Load(intake_sub));
     intake.whenReleased(new LoadStop(intake_sub));
-    shoot.whileHeld(new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2));
+    intakeReverse.whileHeld(new IntakeReverse(intake_sub));
+    intakeReverse.whenReleased(new LoadStop(intake_sub));
+    intake2.whileHeld(new Load(intake_sub));
+    intake2.whenReleased(new Load(intake_sub));
+    shoot.whileHeld(new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, conveyor));
     // shoot.whenReleased(new ShootStop(shooter));
 
   }
@@ -114,7 +122,7 @@ public class RobotContainer {
     TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond,
         Constants.kMaxAccelerationMetersPerSecondSquared)
             // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(Constants.m_kinematics);
+            .setKinematics(Constants.differentialDriveKinematics);
 
     // An example trajectory to follow. All units in meters.
     
@@ -130,35 +138,7 @@ public class RobotContainer {
         config
     );
 
-    MecanumControllerCommand mecanumControllerCommand = new MecanumControllerCommand(
-        trajectory,
-        drivetrain::getPose,
-
-        Constants.kFeedforward,
-        Constants.m_kinematics,
-
-        //Position contollers
-        new PIDController(Constants.kPXController, 0, 0),
-        new PIDController(Constants.kPYController, 0, 0),
-        new ProfiledPIDController(Constants.kPThetaController, 0, 0,
-                                  Constants.kThetaControllerConstraints),
-
-        //Needed for normalizing wheel speeds
-        Constants.kMaxSpeedMetersPerSecond,
-
-        //Velocity PID's
-        new PIDController(Constants.kPDriveVel, 0, 0),
-        new PIDController(Constants.kPDriveVel, 0, 0),
-        new PIDController(Constants.kPDriveVel, 0, 0),
-        new PIDController(Constants.kPDriveVel, 0, 0),
-
-        drivetrain::getWheelSpeeds,
-
-        drivetrain::setDriveSpeedControllersVolts, //Consumer for the output motor voltages
-
-        drivetrain
-    );
     // Run path following command, then stop at the end.
-    return mecanumControllerCommand.andThen(() -> System.out.println("done"));
+    return null;
   }
 }

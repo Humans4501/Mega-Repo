@@ -73,15 +73,23 @@ public class Conveyor extends SubsystemBase {
     conveyorSpark2.set(-speed2);
   }
   public void conveyShoot(double speed1, double speed2, double speed3){
-    if(los4.get() && (!los2.get() || !los1.get() || !los3.get())){
-      speed2 = 0;
-    }else if(!los4.get()){
+    if(!los4.get() && !los3.get()){
       speed1 = 0;
       speed3 = 0;
     }
     if(!los1.get() || !los2.get()){
       speed3 = 0;
     }
+
+    // if(los4.get() && (!los2.get() || !los1.get() || !los3.get())){
+    //   speed2 = 0;
+    // }else if(!los4.get(!)){
+    //   speed1 = 0;
+    //   speed3 = 0;
+    // }
+    // if(!los1.get() || !los2.get()){
+    //   speed3 = 0;
+    // }
 
     indexer.set(speed3);
     conveyorSpark1.set(-speed1);

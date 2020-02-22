@@ -26,6 +26,7 @@ public class OI {
 	Button loadSol = new JoystickButton(controller, LB);
 	Button loadAuto = new JoystickButton (controller, X);
 	Button fireAuto = new JoystickButton (controller, A);
+	Button firefake = new JoystickButton (controller2, A);
 
 	public OI() {
 		fireSol.whileHeld(new StartShoot());
@@ -34,6 +35,7 @@ public class OI {
 		loadSol.whenReleased(new StopLoad());
 		loadAuto.whenPressed(new SmartLoad60());
 		fireAuto.whenPressed(new SmartShoot());
+		firefake.whenPressed(new SmartShoot());
 	}
 
 
