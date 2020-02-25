@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Shooter;
@@ -29,15 +30,15 @@ public class ShootFalcon extends CommandBase {
     pidF1 = pIDF1;
     pidF2 = pIDF2;
     addRequirements(shooter);
-    addRequirements(conveyor);
+    // addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
 
-    pidF1.setSetpoint(-Robot.rpmFalcon1);
-    pidF2.setSetpoint(Robot.rpmFalcon2);
+    pidF1.setSetpoint(-Constants.shooterSpeed);
+    pidF2.setSetpoint(Constants.shooterSpeed);
     pidF1.enable();
     pidF2.enable();
     
@@ -48,11 +49,11 @@ public class ShootFalcon extends CommandBase {
   public void execute() {
     // SmartDashboard.putNumber("output", pidF1.currOutput);
     shooter.shoot(pidF1.currOutput, pidF2.currOutput);
-    if (pidF1.getMeasurement() <= (-Robot.rpmFalcon1 + 150) && pidF1.getMeasurement() >= (-Robot.rpmFalcon1 - 150) 
-    && pidF2.getMeasurement() <= (Robot.rpmFalcon2+150) && pidF2.getMeasurement() >= (Robot.rpmFalcon2-150)){
-      conveyor.conveyShoot(1, 1, 0.75);
+    if (pidF1.getMeasurement() <= (-Constants.shooterSpeed + 150) && pidF1.getMeasurement() >= (-Constants.shooterSpeed - 150) 
+    && pidF2.getMeasurement() <= (Constants.shooterSpeed+150) && pidF2.getMeasurement() >= (Constants.shooterSpeed-150)){
+      // conveyor.conveyShoot(1, 1, 0.75);
     }else{
-      conveyor.conveyShoot(0, 0, 0);
+      // conveyor.conveyShoot(0, 0, 0);
     }
   } 
 

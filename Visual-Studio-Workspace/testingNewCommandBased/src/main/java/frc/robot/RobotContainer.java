@@ -105,7 +105,7 @@ public class RobotContainer {
     intakeReverse.whileHeld(new IntakeReverse(intake_sub));
     intakeReverse.whenReleased(new LoadStop(intake_sub));
     intake2.whileHeld(new Load(intake_sub));
-    intake2.whenReleased(new Load(intake_sub));
+    intake2.whenReleased(new LoadStop(intake_sub));
     shoot.whileHeld(new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, conveyor));
     // shoot.whenReleased(new ShootStop(shooter));
 

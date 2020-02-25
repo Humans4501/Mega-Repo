@@ -29,7 +29,7 @@ public class Load extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.load(-0.8);
+    intake.load(-1);
     // shooter.shoot(joystick.getRawAxis(2), joystick.getRawAxis(2));
   }
 

@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Robot;
 
 public class LimelightAim extends PIDSubsystem {
-  static double Kp = 0.05;
-  static double Ki = 0.000;
+  static double Kp = 0.06;
+  static double Ki = 0.001;
   static double Kd = 0.01;
 
   public double currOutput;

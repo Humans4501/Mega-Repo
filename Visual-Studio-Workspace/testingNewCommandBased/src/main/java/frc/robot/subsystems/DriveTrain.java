@@ -75,7 +75,7 @@ public class DriveTrain extends SubsystemBase {
     backRight.setVoltage(volts.rearRightVoltage);
   }
   public void drive2(double speed, double rotate){
-    drive2.arcadeDrive(speed, rotate);
+    drive2.arcadeDrive(speed, 0.5 * rotate);
   }
 
   @Override

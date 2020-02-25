@@ -49,6 +49,7 @@ public final class Constants {
     public static int losCon4 = 3;
     public static int losCon5 = 4;
 
+    public static final double shooterSpeed = 2000;
     
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
