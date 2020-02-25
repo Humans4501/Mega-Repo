@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -24,19 +25,16 @@ public class Conveyor extends SubsystemBase {
    * 
    */
 
-  CANSparkMax conveyorSpark1, conveyorSpark2;
+  WPI_VictorSPX conveyorSpark1, conveyorSpark2;
   WPI_TalonSRX indexer;
   CANEncoder encoderMax1, encoderMax2;
   DigitalInput los1, los2, los3, los4, los5;
   long time1;
   
   public Conveyor() {
-    conveyorSpark1 = new CANSparkMax(Constants.shoot1, MotorType.kBrushless);
-    conveyorSpark2 = new CANSparkMax(Constants.shoot2, MotorType.kBrushless);
+    conveyorSpark1 = new WPI_VictorSPX(Constants.convey1);
+    conveyorSpark2 = new WPI_VictorSPX(Constants.convey2);
     indexer = new WPI_TalonSRX(Constants.index);
-
-    encoderMax1 = conveyorSpark1.getEncoder();
-    encoderMax2 = conveyorSpark2.getEncoder();
 
     los1 = new DigitalInput(Constants.losCon1);
     los2 = new DigitalInput(Constants.losCon2);
@@ -69,8 +67,8 @@ public class Conveyor extends SubsystemBase {
     }
 
     indexer.set(speed3);
-    conveyorSpark1.set(-speed1);
-    conveyorSpark2.set(-speed2);
+    conveyorSpark1.set(speed1);
+    conveyorSpark2.set(speed2);
   }
   public void conveyShoot(double speed1, double speed2, double speed3){
     if(!los4.get() && !los3.get()){
@@ -92,8 +90,8 @@ public class Conveyor extends SubsystemBase {
     // }
 
     indexer.set(speed3);
-    conveyorSpark1.set(-speed1);
-    conveyorSpark2.set(-speed2);
+    conveyorSpark1.set(speed1);
+    conveyorSpark2.set(speed2);
   }
   
   public void startTime(){

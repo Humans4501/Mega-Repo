@@ -32,8 +32,8 @@ public final class Constants {
     public static int left2 = 20;
     public static int right2 = 19;
 
-    public static int shoot1 = 20;
-    public static int shoot2 = 21;
+    public static int convey1 = 20;
+    public static int convey2 = 21;
     public static int climb1 = 16;
     public static int climb2 = 14;
     public static int load = 18;
