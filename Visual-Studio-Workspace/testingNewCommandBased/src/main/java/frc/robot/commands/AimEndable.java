@@ -9,18 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimelightAim;
 
-public class Aim extends CommandBase {
+public class AimEndable extends CommandBase {
 
   DriveTrain driveTrain;
   LimelightAim limeLightAim;
   /**
    * Creates a new Aim.
    */
-  public Aim(DriveTrain drivetrain, LimelightAim limelightAim) {
+  public AimEndable(DriveTrain drivetrain, LimelightAim limelightAim) {
     // Use addRequirements() here to declare subsystem dependencies.
     driveTrain = drivetrain;
     limeLightAim = limelightAim;
@@ -31,9 +30,10 @@ public class Aim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.setLimelightLed(1);
     limeLightAim.setSetpoint(0);
     limeLightAim.enable();
-    Robot.setLimelightLed(3);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,12 +50,12 @@ public class Aim extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.drive2(0,0);
     limeLightAim.disable();
-    Robot.setLimelightLed(1);
+    Robot.setLimelightLed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return limeLightAim.getDone();
   }
 }

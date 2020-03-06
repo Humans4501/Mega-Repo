@@ -13,6 +13,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -33,10 +34,14 @@ public class Robot extends TimedRobot {
   public static double rpmFalcon2;
   NetworkTableEntry limelightTX = table.getEntry("tx");;
   NetworkTableEntry limelightTA = table.getEntry("ta");
+  NetworkTableEntry limelightTV = table.getEntry("tv");
   ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard");
   private RobotContainer m_robotContainer;
   static double limelightX;
   static double limelightA;
+  static double limelightV;
+
+  SendableChooser<Command> chooser;
   
 
   /**
@@ -59,10 +64,19 @@ public class Robot extends TimedRobot {
     rpmFalcons1 = tab.add("Desired RPM Falcon1", 0).getEntry();
     rpmFalcons2 = tab.add("Desired RPM Falcon2", 0).getEntry();
 
-    RobotContainer.frontleft.setSelectedSensorPosition(0);
-    RobotContainer.frontright.setSelectedSensorPosition(0);
-    RobotContainer.backleft.setSelectedSensorPosition(0);
-    RobotContainer.backright.setSelectedSensorPosition(0);
+    RobotContainer.left2.setSelectedSensorPosition(0);
+    RobotContainer.left1.setSelectedSensorPosition(0);
+    RobotContainer.right2.setSelectedSensorPosition(0);
+    RobotContainer.right1.setSelectedSensorPosition(0);
+
+    RobotContainer.aimEncoder.setDistancePerPulse(1/44.4);
+    RobotContainer.aimEncoder.reset();
+
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+
+
+
+    // chooser.addDefault("auto", RobotCOntainer.);
   }
 
   /**
@@ -93,20 +107,23 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("angle", RobotContainer.ahrs.getAngle());
 
-    SmartDashboard.putNumber("frontLeft", RobotContainer.frontleft.getSelectedSensorPosition() * (-0.10351972333/2048));
-    SmartDashboard.putNumber("frontRight", RobotContainer.frontright.getSelectedSensorPosition() * (0.10351972333/2048));
-    SmartDashboard.putNumber("backLeft", RobotContainer.backleft.getSelectedSensorPosition() * (-0.10351972333/2048));
-    SmartDashboard.putNumber("backRight", RobotContainer.backright.getSelectedSensorPosition() * (0.10351972333/2048));
+    SmartDashboard.putNumber("left2", RobotContainer.left2.getSelectedSensorPosition() * (-0.10351972333/2048));
+    SmartDashboard.putNumber("left 1", RobotContainer.left1.getSelectedSensorPosition() * (0.10351972333/2048));
+    SmartDashboard.putNumber("right2", RobotContainer.right2.getSelectedSensorPosition() * (-0.10351972333/2048));
+    SmartDashboard.putNumber("right 1", RobotContainer.right1.getSelectedSensorPosition() * (0.10351972333/2048));
 
     // SmartDashboard.putNumber("displacement x", RobotContainer.drivetrain.getPose().getTranslation().getX());
     // SmartDashboard.putNumber("displacement y", RobotContainer.drivetrain.getPose().getTranslation().getY());
 
     SmartDashboard.putNumber("distance", RobotContainer.lidar.getDistanceMeters());
 
+    SmartDashboard.putNumber("elevation", RobotContainer.aimEncoder.getDistance());
+
     rpmFalcon1 = rpmFalcons1.getDouble(0);
     rpmFalcon2 = rpmFalcons2.getDouble(0);
     limelightX = limelightTX.getDouble(0.0);
     limelightA = limelightTA.getDouble(0.0);
+    limelightV = limelightTV.getDouble(0.0);
 
   }
 
@@ -116,6 +133,14 @@ public class Robot extends TimedRobot {
 
   public static double getLimelightA() {
     return limelightA;
+  }
+
+  public static double getLimelightV() {
+    return limelightV;
+  }
+
+  public static void setLimelightLed(int status){
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(status);
   }
   /**
    * This function is called once each time the robot enters Disabled mode.
@@ -160,10 +185,13 @@ public class Robot extends TimedRobot {
     }
     RobotContainer.ahrs.zeroYaw();
     RobotContainer.frontleft.setSelectedSensorPosition(0);
-    RobotContainer.frontright.setSelectedSensorPosition(0);
+    RobotContainer.left1.setSelectedSensorPosition(0);
     RobotContainer.backleft.setSelectedSensorPosition(0);
-    RobotContainer.backright.setSelectedSensorPosition(0);
+    RobotContainer.right1.setSelectedSensorPosition(0);
+    RobotContainer.right2.setSelectedSensorPosition(0);
+    RobotContainer.left2.setSelectedSensorPosition(0);
     m_robotContainer.drivetrain.resetOdometry();
+    RobotContainer.aimEncoder.reset();
   }
 
   /**

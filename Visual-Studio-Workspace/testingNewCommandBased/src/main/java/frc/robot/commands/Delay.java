@@ -8,54 +8,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.LimelightAim;
 
-public class Aim extends CommandBase {
-
-  DriveTrain driveTrain;
-  LimelightAim limeLightAim;
+public class Delay extends CommandBase {
   /**
-   * Creates a new Aim.
+   * Creates a new Delay.
    */
-  public Aim(DriveTrain drivetrain, LimelightAim limelightAim) {
+  double time;
+  double delaySeconds;
+  public Delay(double delay) {
     // Use addRequirements() here to declare subsystem dependencies.
-    driveTrain = drivetrain;
-    limeLightAim = limelightAim;
-    addRequirements(drivetrain, limelightAim);
-    
-  }
+    delaySeconds = delay;
+  } 
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    limeLightAim.setSetpoint(0);
-    limeLightAim.enable();
-    Robot.setLimelightLed(3);
+    time = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.getLimelightV() == 1){
-      driveTrain.drive2(0,limeLightAim.currOutput);
-    }
-    // System.out.println("I am running");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.drive2(0,0);
-    limeLightAim.disable();
-    Robot.setLimelightLed(1);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (System.currentTimeMillis() - time > (delaySeconds*1000));
   }
 }

@@ -9,22 +9,28 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
   WPI_TalonFX shooterLeft, shooterRight;
-  WPI_TalonSRX aimer;
+  WPI_VictorSPX aimer;
   CANSparkMax shooterTalonL, shooterTalonR;
+  DigitalInput limit;
 
   public Shooter() {
     shooterLeft = new WPI_TalonFX(Constants.falcons1);
     shooterRight = new WPI_TalonFX(Constants.falcons2);
-    aimer = new WPI_TalonSRX(Constants.elevator);
+    aimer = new WPI_VictorSPX(Constants.elevator);
+    limit = new DigitalInput(Constants.limitSwitch);
     
   }
 
@@ -34,7 +40,19 @@ public class Shooter extends SubsystemBase {
     shooterRight.set(speed2);
   }
 
+  public double getEncoder(){
+    return RobotContainer.aimEncoder.getDistance();
+  }
+
   public void aim(double speed){
+    // speed = (RobotContainer.aimEncoder.getDistance() <= 0.1 && speed > 0)? 0 : speed;
+    if(!limit.get()){
+      RobotContainer.aimEncoder.reset();
+      if(speed > 0){
+        speed = 0;
+      }
+    }
+    speed = (RobotContainer.aimEncoder.getDistance() >= 5 && speed < 0)? 0 : speed;
     aimer.set(-speed);
   }
 

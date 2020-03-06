@@ -30,26 +30,28 @@ import frc.robot.RobotContainer;
 public class DriveTrain extends SubsystemBase {
   MecanumDrive drive;
   DifferentialDrive drive2;
-  WPI_TalonFX frontLeft, frontRight, backLeft, backRight, left2, right2;
+  WPI_TalonFX frontLeft, left1, backLeft, right1, left2, right2;
   DifferentialDriveOdometry m_odometry;
   DifferentialDriveWheelSpeeds wheelSpeeds;
-  CANCoder left, right;
-  
+  SpeedControllerGroup left, right;
 
   /**
    * Creates a new ExampleSubsystem.
    */
   public DriveTrain() {
     frontLeft = new WPI_TalonFX(Constants.frontLeft);
-    frontRight = new WPI_TalonFX(Constants.frontRight);
-    backRight = new WPI_TalonFX(Constants.backRight);
+    left1 = new WPI_TalonFX(Constants.left1);
+    right1 = new WPI_TalonFX(Constants.right1);
     backLeft = new WPI_TalonFX(Constants.backLeft);
     left2 = new WPI_TalonFX(Constants.left2);
     right2 = new WPI_TalonFX(Constants.right2);
 
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()), new Pose2d(0, 0, new Rotation2d()));
 
-    drive2 = new DifferentialDrive(new SpeedControllerGroup(left2, frontRight), new SpeedControllerGroup(right2, backRight));
+    left = new SpeedControllerGroup(left2, left1);
+    right = new SpeedControllerGroup(right2, right1);
+
+    drive2 = new DifferentialDrive(left, right);
   }
 
   public DifferentialDriveKinematics getkinematics(){
@@ -64,15 +66,21 @@ public class DriveTrain extends SubsystemBase {
     return m_odometry.getPoseMeters();
   }
 
+  public double getDistance(){
+    return ((RobotContainer.left1.getSelectedSensorPosition() * 0.00002032858) + (RobotContainer.right1.getSelectedSensorPosition() * -0.00002032858))/2;
+  }
+
+  public double getHeading(){
+    return RobotContainer.ahrs.getYaw();
+  }
+
   public void resetOdometry(){
     m_odometry.resetPosition(new Pose2d(0, 0, new Rotation2d()), new Rotation2d());
   }
-
-  public void setDriveSpeedControllersVolts(MecanumDriveMotorVoltages volts) {
-    frontLeft.setVoltage(volts.frontLeftVoltage);
-    backLeft.setVoltage(volts.rearLeftVoltage);
-    frontRight.setVoltage(volts.frontRightVoltage);
-    backRight.setVoltage(volts.rearRightVoltage);
+ public void tankDriveVolts(double leftVolts, double rightVolts) {
+    left.setVoltage(leftVolts);
+    right.setVoltage(-rightVolts);
+    drive2.feed();
   }
   public void drive2(double speed, double rotate){
     drive2.arcadeDrive(speed, 0.5 * rotate);
@@ -81,8 +89,8 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    wheelSpeeds = new DifferentialDriveWheelSpeeds(RobotContainer.frontright.getSelectedSensorVelocity() * 0.0002032858, RobotContainer.backright.getSelectedSensorVelocity() * 0.0002032858);
-    m_odometry.update(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()),RobotContainer.frontright.getSelectedSensorPosition() * 0.00002032858, RobotContainer.backright.getSelectedSensorPosition() * -0.00002032858);
+    wheelSpeeds = new DifferentialDriveWheelSpeeds(RobotContainer.left1.getSelectedSensorVelocity() * 0.0002032858, RobotContainer.right1.getSelectedSensorVelocity() * 0.0002032858);
+    m_odometry.update(Rotation2d.fromDegrees(RobotContainer.ahrs.getYaw()),RobotContainer.left1.getSelectedSensorPosition() * 0.00002032858, RobotContainer.right1.getSelectedSensorPosition() * -0.00002032858);
     SmartDashboard.putNumber("displacement x", getPose().getTranslation().getX());
     SmartDashboard.putNumber("displacement y", getPose().getTranslation().getY());
   }

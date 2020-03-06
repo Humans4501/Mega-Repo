@@ -20,6 +20,8 @@ public class ShootFalcon extends CommandBase {
   private final Conveyor conveyor;
   private final ShooterDesiredSpeedFalcon1 pidF1;
   private final ShooterDesiredSpeedFalcon2 pidF2;
+  private double time = 0;
+  private boolean readyToShoot = false;
   /**
    * Creates a new Shoot.
    */
@@ -41,6 +43,7 @@ public class ShootFalcon extends CommandBase {
     pidF2.setSetpoint(Constants.shooterSpeed);
     pidF1.enable();
     pidF2.enable();
+    readyToShoot = false;
     
   }
 
@@ -48,13 +51,20 @@ public class ShootFalcon extends CommandBase {
   @Override
   public void execute() {
     // SmartDashboard.putNumber("output", pidF1.currOutput);
-    shooter.shoot(pidF1.currOutput, pidF2.currOutput);
-    if (pidF1.getMeasurement() <= (-Constants.shooterSpeed + 150) && pidF1.getMeasurement() >= (-Constants.shooterSpeed - 150) 
-    && pidF2.getMeasurement() <= (Constants.shooterSpeed+150) && pidF2.getMeasurement() >= (Constants.shooterSpeed-150)){
-      // conveyor.conveyShoot(1, 1, 0.75);
-    }else{
-      // conveyor.conveyShoot(0, 0, 0);
+    if(time == 0){
+      time = System.currentTimeMillis();
     }
+    shooter.shoot(pidF1.currOutput, pidF2.currOutput);
+    
+      if (pidF1.getMeasurement() <= (-Constants.shooterSpeed + 150) && pidF1.getMeasurement() >= (-Constants.shooterSpeed - 150) 
+      && pidF2.getMeasurement() <= (Constants.shooterSpeed+150) && pidF2.getMeasurement() >= (Constants.shooterSpeed-150)){
+        // conveyor.conveyShoot(1, 1, 0.75);  
+        readyToShoot = true;
+      }
+    
+      if(readyToShoot){
+        conveyor.conveyShoot(1,1,0.75);
+      }
   } 
 
   // Called once the command ends or is interrupted.
@@ -64,6 +74,7 @@ public class ShootFalcon extends CommandBase {
     conveyor.conveyShoot(0, 0, 0);
     pidF1.disable();
     pidF2.disable();
+    time = 0;
     
   }
 

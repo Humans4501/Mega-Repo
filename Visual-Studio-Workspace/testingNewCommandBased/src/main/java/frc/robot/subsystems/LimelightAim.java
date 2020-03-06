@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PIDBase.Tolerance;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class LimelightAim extends PIDSubsystem {
@@ -26,6 +28,7 @@ public class LimelightAim extends PIDSubsystem {
     super(
         // The PIDController used by the subsystem
         new PIDController(Kp, Ki, Kd));
+        getController().setTolerance(Constants.kLimelightTolerance, Constants.kLimelightToleranceCPS);
   }
 
   @Override
@@ -43,5 +46,10 @@ public class LimelightAim extends PIDSubsystem {
     // Return the process variable measurement here
     // System.out.println(-Robot.getLimelightX());
     return -Robot.getLimelightX();
+  }
+
+
+  public boolean getDone(){
+    return getController().atSetpoint();
   }
 }

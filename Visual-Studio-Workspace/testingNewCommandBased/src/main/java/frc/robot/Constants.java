@@ -26,9 +26,9 @@ import edu.wpi.first.wpilibj.util.Units;
  */
 public final class Constants {
     public static int frontLeft = 13;
-    public static int frontRight = 11;
+    public static int left1 = 11;
     public static int backLeft = 12;
-    public static int backRight = 10;
+    public static int right1 = 10;
     public static int left2 = 20;
     public static int right2 = 19;
 
@@ -43,13 +43,14 @@ public final class Constants {
     public static int falcons1 = 5; //left
     public static int falcons2 = 6; //right
 
-    public static int losCon1 = 0;
-    public static int losCon2 = 1;
-    public static int losCon3 = 2;
-    public static int losCon4 = 3;
-    public static int losCon5 = 4;
+    public static int losCon0 = 0;
+    public static int losCon1 = 1;
+    public static int losCon2 = 2;
+    public static int losCon3 = 3;
+    public static int losCon4 = 4;
+    public static int limitSwitch = 6;
 
-    public static final double shooterSpeed = 2000;
+    public static final double shooterSpeed = 4501;
     
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
@@ -62,15 +63,30 @@ public final class Constants {
 
     public static final double kPDriveVel = 0.2;
 
+    public static final double kPDriveDistance = 3;
+    public static final double kIDriveDistance = 0;
+    public static final double kDDriveDistance = 0;
+    public static final double kDriveDistanceToleranceM = 0.05;
+    public static final double kDriveDistanceToleranceMPS = 0.5;
+
+    public static final double kPTurnDegrees = 0.1;
+    public static final double kITurnDegrees = 0;
+    public static final double kDTurnDegrees = 0;
+    public static final double kTurnDegreesToleranceD = 1;
+    public static final double kTurnDegreesToleranceDPS = 3;
+
+    public static final double kPAimY = 0.5;
+    public static final double kIAimY = 0;
+    public static final double kDAimY = 0;
+    public static final double kAimYToleranceD = 0.1;
+    public static final double kAimYToleranceDPS = 1;
+
+    public static final double kLimelightTolerance = 3;
+    public static final double kLimelightToleranceCPS = 3;
+
     //pid numbers for pid controllers in autocommand in robot container
-    public static final double kPXController = 0.2;
-    public static final double kPYController = 0.2;
-    public static final double kPThetaController = 0.2;
-
-
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-        new TrapezoidProfile.Constraints(kMaxAngularSpeedRadiansPerSecond,
-        kMaxAngularSpeedRadiansPerSecondSquared);
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 
     public static final SimpleMotorFeedforward kFeedforward = new SimpleMotorFeedforward(ksVolts, kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter);
 

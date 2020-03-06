@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.RobotContainer;
 
 public class ShooterDesiredSpeedFalcon2 extends PIDSubsystem {
-  static double Kp = 0.00025;
+  static double Kp = 0.0001;
   static double Ki = 0.000025;
-  static double Kd = 0;
+  static double Kd = 0.000001;
 
   public double currOutput;
   /**
@@ -33,7 +33,7 @@ public class ShooterDesiredSpeedFalcon2 extends PIDSubsystem {
     // Use the output here
     SmartDashboard.putNumber("setpoint2", setpoint);
     SmartDashboard.putNumber("output Falcon 2", output);
-    currOutput = output + setpoint / 6240;
+    currOutput = output + setpoint / 6320;
   }
 
   public void setpoint(double setPoint){
