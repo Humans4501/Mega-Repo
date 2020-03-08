@@ -83,7 +83,7 @@ public class DriveTrain extends SubsystemBase {
     drive2.feed();
   }
   public void drive2(double speed, double rotate){
-    drive2.arcadeDrive(speed, 0.5 * rotate);
+    drive2.arcadeDrive(speed, 0.75 * rotate);
   }
 
   @Override

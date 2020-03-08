@@ -20,7 +20,7 @@ public class Drive extends CommandBase {
   private final DriveTrain m_subsystem;
   private XboxController driver;
 
-  private double deadzone = 0.1;
+  private double deadzone = 0.05;
   private double x;
   private double y;
   /**

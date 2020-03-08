@@ -129,6 +129,10 @@ public class Conveyor extends SubsystemBase {
     }
     return pass;
   }
+
+  public void runIndexer(double speed){
+    indexer.set(speed);
+  }
   
   public void startTime(){
     time1 = System.currentTimeMillis();

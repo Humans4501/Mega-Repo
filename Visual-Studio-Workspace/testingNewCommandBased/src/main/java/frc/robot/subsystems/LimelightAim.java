@@ -14,8 +14,8 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class LimelightAim extends PIDSubsystem {
-  static double Kp = 0.06;
-  static double Ki = 0.001;
+  static double Kp = 0.14;
+  static double Ki = 0.055;
   static double Kd = 0.01;
 
   public double currOutput;
@@ -29,12 +29,13 @@ public class LimelightAim extends PIDSubsystem {
         // The PIDController used by the subsystem
         new PIDController(Kp, Ki, Kd));
         getController().setTolerance(Constants.kLimelightTolerance, Constants.kLimelightToleranceCPS);
+        
   }
 
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    currOutput = output;
+    currOutput =  output/1.5;
   }
 
   public void setpoint(double setPoint){
@@ -50,6 +51,6 @@ public class LimelightAim extends PIDSubsystem {
 
 
   public boolean getDone(){
-    return getController().atSetpoint();
+    return getController().atSetpoint() && Robot.getLimelightV()==1;
   }
 }

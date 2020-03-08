@@ -57,7 +57,7 @@ public class ShootFalcon extends CommandBase {
     shooter.shoot(pidF1.currOutput, pidF2.currOutput);
     
       if (pidF1.getMeasurement() <= (-Constants.shooterSpeed + 150) && pidF1.getMeasurement() >= (-Constants.shooterSpeed - 150) 
-      && pidF2.getMeasurement() <= (Constants.shooterSpeed+150) && pidF2.getMeasurement() >= (Constants.shooterSpeed-150)){
+      && pidF2.getMeasurement() <= (Constants.shooterSpeed + 150) && pidF2.getMeasurement() >= (Constants.shooterSpeed - 150)){
         // conveyor.conveyShoot(1, 1, 0.75);  
         readyToShoot = true;
       }
@@ -75,7 +75,7 @@ public class ShootFalcon extends CommandBase {
     pidF1.disable();
     pidF2.disable();
     time = 0;
-    
+    readyToShoot = false;
   }
 
   // Returns true when the command should end.

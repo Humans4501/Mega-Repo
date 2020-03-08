@@ -119,6 +119,8 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("elevation", RobotContainer.aimEncoder.getDistance());
 
+    SmartDashboard.putNumber("distance sing falcon encoders", m_robotContainer.drivetrain.getDistance());
+
     rpmFalcon1 = rpmFalcons1.getDouble(0);
     rpmFalcon2 = rpmFalcons2.getDouble(0);
     limelightX = limelightTX.getDouble(0.0);
@@ -158,13 +160,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    RobotContainer.ahrs.zeroYaw();
+    // RobotContainer.frontleft.setSelectedSensorPosition(0);
+    RobotContainer.left1.setSelectedSensorPosition(0);
+    // RobotContainer.backleft.setSelectedSensorPosition(0);
+    RobotContainer.right1.setSelectedSensorPosition(0);
+    RobotContainer.right2.setSelectedSensorPosition(0);
+    RobotContainer.left2.setSelectedSensorPosition(0);
+    // m_robotContainer.drivetrain.resetOdometry();
+    RobotContainer.aimEncoder.reset();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (m_robotContainer.getAutonomousCommand() != null) {
+      m_robotContainer.getAutonomousCommand().schedule();
     }
-    m_robotContainer.drivetrain.resetOdometry();
   }
 
   /**
@@ -183,15 +192,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    RobotContainer.ahrs.zeroYaw();
-    RobotContainer.frontleft.setSelectedSensorPosition(0);
-    RobotContainer.left1.setSelectedSensorPosition(0);
-    RobotContainer.backleft.setSelectedSensorPosition(0);
-    RobotContainer.right1.setSelectedSensorPosition(0);
-    RobotContainer.right2.setSelectedSensorPosition(0);
-    RobotContainer.left2.setSelectedSensorPosition(0);
-    m_robotContainer.drivetrain.resetOdometry();
-    RobotContainer.aimEncoder.reset();
+
   }
 
   /**

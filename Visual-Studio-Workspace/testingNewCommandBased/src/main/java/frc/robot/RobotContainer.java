@@ -92,6 +92,7 @@ public class RobotContainer {
   private JoystickButton shoot = new JoystickButton(xbox, Constants.RB);
   private JoystickButton intakeReverse = new JoystickButton(xbox2, Constants.B);
   private JoystickButton aimShooter = new JoystickButton(xbox, Constants.X);
+  private JoystickButton reverseIndexer = new JoystickButton(xbox2, Constants.A);
 
 
   public RobotContainer() {
@@ -118,7 +119,9 @@ public class RobotContainer {
     intake2.whileHeld(new Load(intake_sub));
     intake2.whenReleased(new LoadStop(intake_sub));
     shoot.whileHeld(new ShootFalcon(shooter, rpmFalcon1, rpmFalcon2, conveyor));
-    aimShooter.whenPressed(new AimY(shooter, 3));
+    aimShooter.whenPressed(new AimY(shooter, 2.58));
+    reverseIndexer.whileHeld(new ReverseIndexer(conveyor, -0.75));
+    reverseIndexer.whenReleased(new ReverseIndexer(conveyor, 0));
     // shoot.whenReleased(new ShootStop(shooter));
 
   }
@@ -161,5 +164,10 @@ public class RobotContainer {
 
     // Run path following command, then stop at the end.
     return new Auto(drivetrain, intake_sub, conveyor, limelightAim, shooter, rpmFalcon1, rpmFalcon2);
+    // return null;
+    // return new TurnToDegrees(drivetrain, 10);
+    // return new DriveForDistance(drivetrain, 1.5);
+    // return new Auto1(drivetrain, intake_sub, conveyor, limelightAim, shooter, rpmFalcon1, rpmFalcon2);
+    // return new AimEndable(drivetrain, limelightAim);
   }
 }

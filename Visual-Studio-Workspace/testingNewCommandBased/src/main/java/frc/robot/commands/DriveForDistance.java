@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
@@ -30,11 +31,13 @@ public class DriveForDistance extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-        drivetrain.drive2(output, 0);
+        drivetrain.drive2(MathUtil.clamp(output, -0.6, 0.6), 0);
+        System.out.println("I am Driving I think");
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(Constants.kDriveDistanceToleranceM, Constants.kDriveDistanceToleranceMPS);
+    
   }
 
   // Returns true when the command should end.

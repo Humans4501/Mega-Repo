@@ -8,54 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.LimelightAim;
+import frc.robot.subsystems.Conveyor;
 
-public class AimEndable extends CommandBase {
-
-  DriveTrain driveTrain;
-  LimelightAim limeLightAim;
+public class ReverseIndexer extends CommandBase {
   /**
-   * Creates a new Aim.
+   * Creates a new ReverseIndexer.
    */
-  public AimEndable(DriveTrain drivetrain, LimelightAim limelightAim) {
+  double speed;
+  Conveyor conveyor;
+  public ReverseIndexer(Conveyor subsystem, double speedG) {
     // Use addRequirements() here to declare subsystem dependencies.
-    driveTrain = drivetrain;
-    limeLightAim = limelightAim;
-    addRequirements(drivetrain, limelightAim);
-    
+    conveyor = subsystem;
+    speed = speedG;
+    addRequirements(conveyor);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    limeLightAim.setSetpoint(0);
-    limeLightAim.enable();
-    Robot.setLimelightLed(3);
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Robot.getLimelightV() == 1){
-      driveTrain.drive2(0,limeLightAim.currOutput);
-    }
-    // System.out.println("I am running");
+    conveyor.runIndexer(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.drive2(0,0);
-    limeLightAim.disable();
-    Robot.setLimelightLed(1);
+    conveyor.runIndexer(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limeLightAim.getDone();
+    return false;
   }
 }

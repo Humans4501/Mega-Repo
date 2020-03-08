@@ -33,24 +33,22 @@ import frc.robot.subsystems.ShooterDesiredSpeedFalcon2;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Auto extends SequentialCommandGroup {
+public class Auto1 extends SequentialCommandGroup {
   /**
    * Creates a new Auto.
    */
-  public Auto(DriveTrain drivetrain, Intake intake, Conveyor conveyor, LimelightAim limelightAim, Shooter shooter, 
+  public Auto1(DriveTrain drivetrain, Intake intake, Conveyor conveyor, LimelightAim limelightAim, Shooter shooter, 
               ShooterDesiredSpeedFalcon1 rpm1, ShooterDesiredSpeedFalcon2 rpm2) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     
-    super( 
-           new DriveForDistance(drivetrain, 1),
+    super( new ParallelRaceGroup(new DriveForDistance(drivetrain, 1), new ConveyorForward(conveyor)),
            new DriveForDistance(drivetrain, 0.9),
-           new ParallelRaceGroup(new DriveForDistance(drivetrain, 3), new Load(intake), new ConveyorForward(conveyor)),
-          //  new DriveForDistance(drivetrain, 2.9),
-           new ParallelRaceGroup(new Delay(1.5), new Load(intake), new ConveyorForward(conveyor)),
-           new ParallelRaceGroup(new DriveForDistance(drivetrain, 2), new ConveyorForward(conveyor)),
+           new ParallelRaceGroup(new Delay(1.5)),
+          //  new ParallelRaceGroup(new DriveForDistance(drivetrain, 1), new ConveyorForward(conveyor)),
           //  new TurnToDegrees(drivetrain, 10),
+          //  new DriveForDistance(drivetrain, 1),
            new ParallelCommandGroup(new AimEndable(drivetrain, limelightAim), new AimY(shooter, 2.58)) , new ShootFalcon(shooter, rpm1, rpm2, conveyor));
-          //  System.out.println("I am declared");
+           System.out.println("I am declared");
   }
 }

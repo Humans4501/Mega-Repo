@@ -63,26 +63,26 @@ public final class Constants {
 
     public static final double kPDriveVel = 0.2;
 
-    public static final double kPDriveDistance = 3;
+    public static final double kPDriveDistance = 5;
     public static final double kIDriveDistance = 0;
     public static final double kDDriveDistance = 0;
     public static final double kDriveDistanceToleranceM = 0.05;
-    public static final double kDriveDistanceToleranceMPS = 0.5;
+    public static final double kDriveDistanceToleranceMPS = 0.1;
 
-    public static final double kPTurnDegrees = 0.1;
+    public static final double kPTurnDegrees = 0.14;
     public static final double kITurnDegrees = 0;
-    public static final double kDTurnDegrees = 0;
-    public static final double kTurnDegreesToleranceD = 1;
-    public static final double kTurnDegreesToleranceDPS = 3;
+    public static final double kDTurnDegrees = 0.0;
+    public static final double kTurnDegreesToleranceD = 0.5;
+    public static final double kTurnDegreesToleranceDPS = 0;
 
-    public static final double kPAimY = 0.5;
+    public static final double kPAimY = 5;
     public static final double kIAimY = 0;
     public static final double kDAimY = 0;
     public static final double kAimYToleranceD = 0.1;
-    public static final double kAimYToleranceDPS = 1;
+    public static final double kAimYToleranceDPS = 0.1;
 
-    public static final double kLimelightTolerance = 3;
-    public static final double kLimelightToleranceCPS = 3;
+    public static final double kLimelightTolerance = 2;
+    public static final double kLimelightToleranceCPS = 0.25;
 
     //pid numbers for pid controllers in autocommand in robot container
     public static final double kRamseteB = 2;

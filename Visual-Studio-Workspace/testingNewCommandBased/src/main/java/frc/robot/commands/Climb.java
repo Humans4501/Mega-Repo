@@ -34,7 +34,15 @@ public class Climb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.climb(controller.getRawAxis(Constants.STICK_LY), controller.getRawAxis(Constants.STICK_RY));
+    double speedL = 0;
+    double speedR = 0;
+    if(-controller.getRawAxis(Constants.STICK_LY) < -0.2 || -controller.getRawAxis(Constants.STICK_LY) > 0.2){
+      speedL = -controller.getRawAxis(Constants.STICK_LY);
+    }
+    if(-controller.getRawAxis(Constants.STICK_RY) < -0.2 || -controller.getRawAxis(Constants.STICK_RY) > 0.2){
+      speedR = -controller.getRawAxis(Constants.STICK_RY);
+    }
+    climber.climb(speedL, speedR);
   }
 
   // Called once the command ends or is interrupted.
